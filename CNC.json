@@ -1,0 +1,9 @@
+{
+  "name": "My CloudStream Plugins",
+  "iconUrl": "https://raw.githubusercontent.com/YOUR_USERNAME/My-CloudStream-Plugins/refs/heads/builds/cnc.png",
+  "description": "CastleTV, CNC Verse and MovieBox Plugins",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://raw.githubusercontent.com/YOUR_USERNAME/My-CloudStream-Plugins/builds/plugins.json"
+  ]
+}
