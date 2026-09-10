@@ -1,31 +1,12 @@
 # My CloudStream Plugins
 
-Clean CloudStream plugins — **no popups, no ads, no donation dialogs**. Auto-synced daily with upstream updates.
-
-> Original plugins by [NivinCNC](https://github.com/NivinCNC)  
-> All monetization/ads stripped automatically via GitHub Actions
-
----
-
-## 📦 Installation URL
-
-Copy and paste this into **CloudStream → Settings → Extensions → Add Repository**:
+## Installation URL
 
 ```
 https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/refs/heads/builds/CNC.json
 ```
 
-Or use the short link: **[Click to copy](https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/refs/heads/builds/CNC.json)**
-
----
-
-## 🔥 What's Different
-
-✅ **No donation popups** — stripped from all plugins  
-✅ **No ads** — all ad loaders removed  
-✅ **No subscription gates** — content never paywalled  
-✅ **Auto-updated daily** — syncs with NivinCNC's repo every 24h  
-✅ **Custom icon** — Sharingan theme
+Copy and paste this URL into CloudStream → Settings → Extensions → Add Repository
 
 ---
 
