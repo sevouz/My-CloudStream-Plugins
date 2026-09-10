@@ -14,6 +14,7 @@ Copy and paste this URL into CloudStream → Settings → Extensions → Add Rep
 
 | Name | TV Types | Version | Status |
 |------|----------|---------|--------|
+| AniKoto | Anime, AnimeMovie | 4 | ✅ Working |
 | CastleTvProvider | Movie, TvSeries | 39 | ✅ Working |
 | CNC Verse | Movie, TvSeries | 110 | ✅ Working |
 | CNC Verse Mobile | Movie, TvSeries | 9 | ✅ Working |

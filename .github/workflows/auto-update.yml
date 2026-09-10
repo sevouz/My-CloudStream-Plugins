@@ -29,18 +29,24 @@ jobs:
           curl -L "https://bitbucket.org/JesusFreke/smali/downloads/smali-2.5.2.jar" -o tools/smali.jar
           echo "Tools downloaded"
 
-      - name: Fetch upstream versions from CNCVerse
+      - name: Fetch upstream versions from CNCVerse and phisher98
         id: fetch_versions
         run: |
           echo "Fetching upstream plugins.json from NivinCNC..."
           curl -s "https://raw.githubusercontent.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/builds/plugins.json" -o /tmp/upstream_plugins.json
           
-          # Extract versions for our 3 plugins
+          echo "Fetching upstream plugins.json from phisher98..."
+          curl -s "https://raw.githubusercontent.com/phisher98/cloudstream-extensions-phisher/builds/plugins.json" -o /tmp/phisher_plugins.json
+          
+          # Extract versions for CNCVerse plugins
           CASTLE_VER=$(jq -r '.[] | select(.internalName=="CastleTvProvider") | .version' /tmp/upstream_plugins.json)
           CNCVERSE_VER=$(jq -r '.[] | select(.internalName=="CNC Verse") | .version' /tmp/upstream_plugins.json)
           CNCVERSE_MOB_VER=$(jq -r '.[] | select(.internalName=="CNC Verse Mobile") | .version' /tmp/upstream_plugins.json)
           MOVIEBOX_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProvider") | .version' /tmp/upstream_plugins.json)
           MOVIEBOXIN_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProviderIN") | .version' /tmp/upstream_plugins.json)
+          
+          # Extract version for AniKoto from phisher98
+          ANIKOTO_VER=$(jq -r '.[] | select(.internalName=="AniKoto") | .version' /tmp/phisher_plugins.json)
           
           # Get current versions from our plugins.json
           MY_CASTLE_VER=$(jq -r '.[] | select(.internalName=="CastleTvProvider") | .version' plugins.json)
@@ -48,9 +54,10 @@ jobs:
           MY_CNCVERSE_MOB_VER=$(jq -r '.[] | select(.internalName=="CNC Verse Mobile") | .version' plugins.json)
           MY_MOVIEBOX_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProvider") | .version' plugins.json)
           MY_MOVIEBOXIN_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProviderIN") | .version' plugins.json)
+          MY_ANIKOTO_VER=$(jq -r '.[] | select(.internalName=="AniKoto") | .version' plugins.json)
           
-          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER"
-          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER"
+          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | AniKoto=$ANIKOTO_VER"
+          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | AniKoto=$MY_ANIKOTO_VER"
           
           # Determine which need updating
           NEEDS_UPDATE=false
@@ -59,6 +66,7 @@ jobs:
           [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ] && NEEDS_UPDATE=true && echo "CNC Verse Mobile needs update: $MY_CNCVERSE_MOB_VER -> $CNCVERSE_MOB_VER"
           [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ] && NEEDS_UPDATE=true && echo "MovieBoxProvider needs update: $MY_MOVIEBOX_VER -> $MOVIEBOX_VER"
           [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && NEEDS_UPDATE=true && echo "MovieBoxProviderIN needs update: $MY_MOVIEBOXIN_VER -> $MOVIEBOXIN_VER"
+          [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ] && NEEDS_UPDATE=true && echo "AniKoto needs update: $MY_ANIKOTO_VER -> $ANIKOTO_VER"
           
           echo "needs_update=$NEEDS_UPDATE" >> $GITHUB_OUTPUT
           echo "castle_ver=$CASTLE_VER" >> $GITHUB_OUTPUT
@@ -66,16 +74,19 @@ jobs:
           echo "cncverse_mob_ver=$CNCVERSE_MOB_VER" >> $GITHUB_OUTPUT
           echo "moviebox_ver=$MOVIEBOX_VER" >> $GITHUB_OUTPUT
           echo "movieboxin_ver=$MOVIEBOXIN_VER" >> $GITHUB_OUTPUT
+          echo "anikoto_ver=$ANIKOTO_VER" >> $GITHUB_OUTPUT
           echo "my_castle_ver=$MY_CASTLE_VER" >> $GITHUB_OUTPUT
           echo "my_cncverse_ver=$MY_CNCVERSE_VER" >> $GITHUB_OUTPUT
           echo "my_cncverse_mob_ver=$MY_CNCVERSE_MOB_VER" >> $GITHUB_OUTPUT
           echo "my_moviebox_ver=$MY_MOVIEBOX_VER" >> $GITHUB_OUTPUT
           echo "my_movieboxin_ver=$MY_MOVIEBOXIN_VER" >> $GITHUB_OUTPUT
+          echo "my_anikoto_ver=$MY_ANIKOTO_VER" >> $GITHUB_OUTPUT
 
       - name: Download updated plugins from upstream
         if: steps.fetch_versions.outputs.needs_update == 'true'
         run: |
           BASE_URL="https://raw.githubusercontent.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/builds"
+          PHISHER_URL="https://raw.githubusercontent.com/phisher98/cloudstream-extensions-phisher/builds"
           
           CASTLE_VER="${{ steps.fetch_versions.outputs.castle_ver }}"
           MY_CASTLE_VER="${{ steps.fetch_versions.outputs.my_castle_ver }}"
@@ -106,6 +117,12 @@ jobs:
           [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && \
             curl -L "$BASE_URL/MovieBoxProviderIN.cs3" -o "MovieBoxProviderIN.cs3" && \
             echo "Downloaded MovieBoxProviderIN.cs3"
+          
+          ANIKOTO_VER="${{ steps.fetch_versions.outputs.anikoto_ver }}"
+          MY_ANIKOTO_VER="${{ steps.fetch_versions.outputs.my_anikoto_ver }}"
+          [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ] && \
+            curl -L "$PHISHER_URL/AniKoto.cs3" -o "AniKoto.cs3" && \
+            echo "Downloaded AniKoto.cs3"
 
       - name: Patch all plugins (remove popups, ads, donation dialogs)
         if: steps.fetch_versions.outputs.needs_update == 'true'
@@ -303,19 +320,24 @@ jobs:
           with open(plugins_file) as f:
               plugins = json.load(f)
           
+          # Load upstream files
           upstream_file = "/tmp/upstream_plugins.json"
           with open(upstream_file) as f:
               upstream = json.load(f)
           
+          phisher_file = "/tmp/phisher_plugins.json"
+          with open(phisher_file) as f:
+              phisher = json.load(f)
+          
           # Build upstream version lookup
           upstream_map = {p["internalName"]: p for p in upstream}
+          phisher_map = {p["internalName"]: p for p in phisher}
           
-          our_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN"]
+          cnc_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN"]
+          phisher_plugins = ["AniKoto"]
           
           for plugin in plugins:
               name = plugin["internalName"]
-              if name not in our_plugins:
-                  continue
               
               cs3_name = name + ".cs3"
               cs3_path = os.path.join(plugin_dir, cs3_name)
@@ -323,16 +345,18 @@ jobs:
               if not os.path.exists(cs3_path):
                   continue
               
-              # Recalculate hash and size from the patched file
+              # Recalculate hash and size from the file (patched for CNC, unpatched for phisher)
               with open(cs3_path, "rb") as f:
                   data = f.read()
               
               sha256 = hashlib.sha256(data).hexdigest()
               size = len(data)
               
-              # Update version from upstream
-              if name in upstream_map:
+              # Update version from appropriate upstream
+              if name in cnc_plugins and name in upstream_map:
                   plugin["version"] = upstream_map[name]["version"]
+              elif name in phisher_plugins and name in phisher_map:
+                  plugin["version"] = phisher_map[name]["version"]
               
               plugin["fileHash"] = f"sha256-{sha256}"
               plugin["fileSize"] = size
@@ -375,6 +399,10 @@ jobs:
           MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.movieboxin_ver }}"
           MY_MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.my_movieboxin_ver }}"
           [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && MSG+="- MovieBoxProviderIN v$MY_MOVIEBOXIN_VER → v$MOVIEBOXIN_VER"$'\n'
+          
+          ANIKOTO_VER="${{ steps.fetch_versions.outputs.anikoto_ver }}"
+          MY_ANIKOTO_VER="${{ steps.fetch_versions.outputs.my_anikoto_ver }}"
+          [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ] && MSG+="- AniKoto v$MY_ANIKOTO_VER → v$ANIKOTO_VER"$'\n'
           
           MSG+=$'\n'"Donation popups, ads and subscription dialogs stripped."
           
