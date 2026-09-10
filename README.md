@@ -10,7 +10,7 @@ A clean, minimal CloudStream extension repo with 3 essential plugins.
 
 **Manual Install** — Copy and paste this URL into CloudStream → Add Repo:
 ```
-https://raw.githubusercontent.com/YOUR_USERNAME/My-CloudStream-Plugins/refs/heads/builds/CNC.json
+https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/refs/heads/builds/CNC.json
 ```
 
 ---
