@@ -1,10 +1,10 @@
 [
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CastleTvProvider/icon.png",
-        "fileHash": "sha256-7d991246a73165d0f3aef5c9580c2ee27ce3907f7838b07a1cefa471601c7fcb",
+        "fileHash": "sha256-a156d3549401b9ff9660f140b4697a1ffef4a60885ee6b86561ee0a24fc94a2d",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 83376,
+        "fileSize": 85083,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -22,10 +22,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CNC%20Verse/icon.png",
-        "fileHash": "sha256-aed23aad49b22ee359e3456cc90ae3bef0fbd99dea50bd5b5a39f1aa24e54f56",
+        "fileHash": "sha256-0305c29bf9bf2daa8642f62af08da09c2380dceec1cf958a2a50403579cc4c51",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 100861,
+        "fileSize": 103431,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -43,10 +43,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CNC%20Verse%20Mobile/logo.jpeg",
-        "fileHash": "sha256-ea917f3e647068e2e271b38758530f47989970910dea1f1f2790a6370440648c",
+        "fileHash": "sha256-4538145375397b04e5f43338d47809babae5b62d62fc2e453bf8907bc8b1371b",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 93337,
+        "fileSize": 94805,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -64,10 +64,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/MovieBoxProvider/icon.png",
-        "fileHash": "sha256-636cf8acad05b2ab43e3d137e548d0b989ccfeb06d2105084cb59639130ea309",
+        "fileHash": "sha256-95b884e4b58a4767dfec8330295cb078a3c77a7e5683dde0c805bf56e50a2f9b",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 94070,
+        "fileSize": 96663,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -85,10 +85,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/MovieBoxProviderIN/icon.png",
-        "fileHash": "sha256-32c94b3f10e416f8c989fb519d7c7b2fdea497efafe8a1bdd6a9468e2dd23984",
+        "fileHash": "sha256-1bb48b7f88787b3beaf6c546136ee086ce685ea6a3f7b39d8edf3800023b85fa",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 91751,
+        "fileSize": 94162,
         "status": 1,
         "language": "ta",
         "authors": [
