@@ -42,7 +42,7 @@
         "name": "CastleTvProvider"
     },
     {
-        "iconUrl": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/master/Logos/icon.png",
+        "iconUrl": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/master/Logos/mirrorverse.png",
         "fileHash": "sha256-0305c29bf9bf2daa8642f62af08da09c2380dceec1cf958a2a50403579cc4c51",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
