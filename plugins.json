@@ -1,5 +1,26 @@
 [
     {
+        "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
+        "fileHash": "sha256-0624a5d845dbe1390e006ccdeb69bf7c2a055d59e264fa64ac7af75349bfff20",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "fileSize": 79526,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "phisher98"
+        ],
+        "tvTypes": [
+            "Anime",
+            "AnimeMovie"
+        ],
+        "version": 4,
+        "internalName": "AniKoto",
+        "description": "AniKoto - Anime streaming",
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniKoto.cs3",
+        "name": "AniKoto"
+    },
+    {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CastleTvProvider/icon.png",
         "fileHash": "sha256-a156d3549401b9ff9660f140b4697a1ffef4a60885ee6b86561ee0a24fc94a2d",
         "apiVersion": 1,
