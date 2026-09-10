@@ -1,0 +1,387 @@
+name: Auto Update & Patch Plugins
+
+on:
+  schedule:
+    - cron: '0 3 * * *'   # runs every day at 3:00 AM UTC
+  workflow_dispatch:        # also allows manual trigger from GitHub Actions tab
+
+jobs:
+  update-plugins:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout builds branch
+        uses: actions/checkout@v4
+        with:
+          ref: builds
+          fetch-depth: 0
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Download baksmali & smali tools
+        run: |
+          mkdir -p tools
+          curl -L "https://bitbucket.org/JesusFreke/smali/downloads/baksmali-2.5.2.jar" -o tools/baksmali.jar
+          curl -L "https://bitbucket.org/JesusFreke/smali/downloads/smali-2.5.2.jar" -o tools/smali.jar
+          echo "Tools downloaded"
+
+      - name: Fetch upstream versions from CNCVerse
+        id: fetch_versions
+        run: |
+          echo "Fetching upstream plugins.json from NivinCNC..."
+          curl -s "https://raw.githubusercontent.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/builds/plugins.json" -o /tmp/upstream_plugins.json
+          
+          # Extract versions for our 3 plugins
+          CASTLE_VER=$(jq -r '.[] | select(.internalName=="CastleTvProvider") | .version' /tmp/upstream_plugins.json)
+          CNCVERSE_VER=$(jq -r '.[] | select(.internalName=="CNC Verse") | .version' /tmp/upstream_plugins.json)
+          CNCVERSE_MOB_VER=$(jq -r '.[] | select(.internalName=="CNC Verse Mobile") | .version' /tmp/upstream_plugins.json)
+          MOVIEBOX_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProvider") | .version' /tmp/upstream_plugins.json)
+          MOVIEBOXIN_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProviderIN") | .version' /tmp/upstream_plugins.json)
+          
+          # Get current versions from our plugins.json
+          MY_CASTLE_VER=$(jq -r '.[] | select(.internalName=="CastleTvProvider") | .version' plugins.json)
+          MY_CNCVERSE_VER=$(jq -r '.[] | select(.internalName=="CNC Verse") | .version' plugins.json)
+          MY_CNCVERSE_MOB_VER=$(jq -r '.[] | select(.internalName=="CNC Verse Mobile") | .version' plugins.json)
+          MY_MOVIEBOX_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProvider") | .version' plugins.json)
+          MY_MOVIEBOXIN_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProviderIN") | .version' plugins.json)
+          
+          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER"
+          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER"
+          
+          # Determine which need updating
+          NEEDS_UPDATE=false
+          [ "$CASTLE_VER" != "$MY_CASTLE_VER" ] && NEEDS_UPDATE=true && echo "CastleTvProvider needs update: $MY_CASTLE_VER -> $CASTLE_VER"
+          [ "$CNCVERSE_VER" != "$MY_CNCVERSE_VER" ] && NEEDS_UPDATE=true && echo "CNC Verse needs update: $MY_CNCVERSE_VER -> $CNCVERSE_VER"
+          [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ] && NEEDS_UPDATE=true && echo "CNC Verse Mobile needs update: $MY_CNCVERSE_MOB_VER -> $CNCVERSE_MOB_VER"
+          [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ] && NEEDS_UPDATE=true && echo "MovieBoxProvider needs update: $MY_MOVIEBOX_VER -> $MOVIEBOX_VER"
+          [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && NEEDS_UPDATE=true && echo "MovieBoxProviderIN needs update: $MY_MOVIEBOXIN_VER -> $MOVIEBOXIN_VER"
+          
+          echo "needs_update=$NEEDS_UPDATE" >> $GITHUB_OUTPUT
+          echo "castle_ver=$CASTLE_VER" >> $GITHUB_OUTPUT
+          echo "cncverse_ver=$CNCVERSE_VER" >> $GITHUB_OUTPUT
+          echo "cncverse_mob_ver=$CNCVERSE_MOB_VER" >> $GITHUB_OUTPUT
+          echo "moviebox_ver=$MOVIEBOX_VER" >> $GITHUB_OUTPUT
+          echo "movieboxin_ver=$MOVIEBOXIN_VER" >> $GITHUB_OUTPUT
+          echo "my_castle_ver=$MY_CASTLE_VER" >> $GITHUB_OUTPUT
+          echo "my_cncverse_ver=$MY_CNCVERSE_VER" >> $GITHUB_OUTPUT
+          echo "my_cncverse_mob_ver=$MY_CNCVERSE_MOB_VER" >> $GITHUB_OUTPUT
+          echo "my_moviebox_ver=$MY_MOVIEBOX_VER" >> $GITHUB_OUTPUT
+          echo "my_movieboxin_ver=$MY_MOVIEBOXIN_VER" >> $GITHUB_OUTPUT
+
+      - name: Download updated plugins from upstream
+        if: steps.fetch_versions.outputs.needs_update == 'true'
+        run: |
+          BASE_URL="https://raw.githubusercontent.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/builds"
+          
+          CASTLE_VER="${{ steps.fetch_versions.outputs.castle_ver }}"
+          MY_CASTLE_VER="${{ steps.fetch_versions.outputs.my_castle_ver }}"
+          [ "$CASTLE_VER" != "$MY_CASTLE_VER" ] && \
+            curl -L "$BASE_URL/CastleTvProvider.cs3" -o "CastleTvProvider.cs3" && \
+            echo "Downloaded CastleTvProvider.cs3"
+          
+          CNCVERSE_VER="${{ steps.fetch_versions.outputs.cncverse_ver }}"
+          MY_CNCVERSE_VER="${{ steps.fetch_versions.outputs.my_cncverse_ver }}"
+          [ "$CNCVERSE_VER" != "$MY_CNCVERSE_VER" ] && \
+            curl -L "$BASE_URL/CNC%20Verse.cs3" -o "CNC Verse.cs3" && \
+            echo "Downloaded CNC Verse.cs3"
+          
+          CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.cncverse_mob_ver }}"
+          MY_CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.my_cncverse_mob_ver }}"
+          [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ] && \
+            curl -L "$BASE_URL/CNC%20Verse%20Mobile.cs3" -o "CNC Verse Mobile.cs3" && \
+            echo "Downloaded CNC Verse Mobile.cs3"
+          
+          MOVIEBOX_VER="${{ steps.fetch_versions.outputs.moviebox_ver }}"
+          MY_MOVIEBOX_VER="${{ steps.fetch_versions.outputs.my_moviebox_ver }}"
+          [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ] && \
+            curl -L "$BASE_URL/MovieBoxProvider.cs3" -o "MovieBoxProvider.cs3" && \
+            echo "Downloaded MovieBoxProvider.cs3"
+          
+          MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.movieboxin_ver }}"
+          MY_MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.my_movieboxin_ver }}"
+          [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && \
+            curl -L "$BASE_URL/MovieBoxProviderIN.cs3" -o "MovieBoxProviderIN.cs3" && \
+            echo "Downloaded MovieBoxProviderIN.cs3"
+
+      - name: Patch all plugins (remove popups, ads, donation dialogs)
+        if: steps.fetch_versions.outputs.needs_update == 'true'
+        run: |
+          patch_plugin() {
+            local CS3="$1"
+            echo "--- Patching: $CS3 ---"
+            
+            local WORK_DIR="/tmp/patch_$(basename "$CS3" .cs3)"
+            local SMALI_DIR="$WORK_DIR/smali"
+            local EXTRACT_DIR="$WORK_DIR/extracted"
+            
+            rm -rf "$WORK_DIR"
+            mkdir -p "$EXTRACT_DIR" "$SMALI_DIR"
+            
+            # Extract cs3 (it's a zip)
+            unzip -q "$CS3" -d "$EXTRACT_DIR"
+            
+            if [ ! -f "$EXTRACT_DIR/classes.dex" ]; then
+              echo "  No classes.dex found, skipping"
+              return
+            fi
+            
+            # Disassemble dex to smali
+            java -jar tools/baksmali.jar d "$EXTRACT_DIR/classes.dex" -o "$SMALI_DIR"
+            
+            # ── PATCH 1: DonationManager ──────────────────────────────────────
+            # Kills checkAndShow() and showNow() — the two methods that trigger
+            # the popup from within each provider's load() call
+            DM="$SMALI_DIR/com/cncverse/donation/DonationManager.smali"
+            if [ -f "$DM" ]; then
+              python3 - "$DM" <<'PYEOF'
+          import re, sys
+          path = sys.argv[1]
+          with open(path, 'r') as f:
+              content = f.read()
+          
+          # Methods to kill — replace entire body with return-void
+          methods_to_kill = [
+              r'(\.method public final checkAndShow\(Ljava/lang/String;\)V)',
+              r'(\.method public final showNow\(Ljava/lang/String;\)V)',
+              r'(\.method public final resetCooldown\(Landroid/content/Context;\)V)',
+          ]
+          
+          for pattern in methods_to_kill:
+              content = re.sub(
+                  pattern + r'(.*?)(\.end method)',
+                  r'\1\n    .registers 2\n    .param p1\n\n    return-void\n\3',
+                  content,
+                  flags=re.DOTALL
+              )
+          
+          with open(path, 'w') as f:
+              f.write(content)
+          print("  DonationManager patched")
+          PYEOF
+            fi
+            
+            # ── PATCH 2: DonationDialogFragment ──────────────────────────────
+            # Kills onCreateView (builds the dialog UI) and onStart (shows it)
+            # Double-layer kill — even if DonationManager somehow triggers,
+            # the dialog itself will not render
+            DDF="$SMALI_DIR/com/cncverse/donation/DonationDialogFragment.smali"
+            if [ -f "$DDF" ]; then
+              python3 - "$DDF" <<'PYEOF'
+          import re, sys
+          path = sys.argv[1]
+          with open(path, 'r') as f:
+              content = f.read()
+          
+          methods_to_kill = [
+              r'(\.method public onCreateView\(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;\)Landroid/view/View;)',
+              r'(\.method public onStart\(\)V)',
+              r'(\.method public onCreate\(Landroid/os/Bundle;\)V)',
+          ]
+          
+          for pattern in methods_to_kill:
+              # onCreateView must return null (object), others return void
+              if 'View;)' in pattern:
+                  replacement = r'\1\n    .registers 2\n\n    const/4 v0, 0x0\n    return-object v0\n\2'
+              else:
+                  replacement = r'\1\n    .registers 1\n\n    return-void\n\2'
+              content = re.sub(
+                  pattern + r'(.*?)(\.end method)',
+                  replacement,
+                  content,
+                  flags=re.DOTALL
+              )
+          
+          with open(path, 'w') as f:
+              f.write(content)
+          print("  DonationDialogFragment patched")
+          PYEOF
+            fi
+            
+            # ── PATCH 3: SubscriptionManager (if present) ────────────────────
+            # Kills any subscription gate that blocks content behind a paywall
+            SM="$SMALI_DIR/com/cncverse/subscription/SubscriptionManager.smali"
+            if [ -f "$SM" ]; then
+              python3 - "$SM" <<'PYEOF'
+          import re, sys
+          path = sys.argv[1]
+          with open(path, 'r') as f:
+              content = f.read()
+          
+          # Kill any method that checks subscription status
+          # Replace isPremium / isSubscribed / checkSubscription to always return true
+          # (so content is never gated)
+          content = re.sub(
+              r'(\.method public.*?(?:isPremium|isSubscribed|hasPremium|checkSubscription)\(\)Z)(.*?)(\.end method)',
+              r'\1\n    .registers 1\n\n    const/4 v0, 0x1\n    return v0\n\3',
+              content,
+              flags=re.DOTALL
+          )
+          
+          # Kill showSubscriptionDialog / showPaywall
+          content = re.sub(
+              r'(\.method public.*?(?:showSubscriptionDialog|showPaywall|showPremiumDialog)\(.*?\)V)(.*?)(\.end method)',
+              r'\1\n    .registers 1\n\n    return-void\n\3',
+              content,
+              flags=re.DOTALL
+          )
+          
+          with open(path, 'w') as f:
+              f.write(content)
+          print("  SubscriptionManager patched")
+          PYEOF
+            fi
+            
+            # ── PATCH 4: Any AdManager / AdProvider class ─────────────────────
+            # Kill any ad loading or ad display methods generically
+            for AD_FILE in $(find "$SMALI_DIR" -name "Ad*.smali" -o -name "*AdManager*.smali" -o -name "*AdHelper*.smali" 2>/dev/null); do
+              python3 - "$AD_FILE" <<'PYEOF'
+          import re, sys
+          path = sys.argv[1]
+          with open(path, 'r') as f:
+              content = f.read()
+          
+          # Kill any void method that contains "ad", "show", "load", "display"
+          content = re.sub(
+              r'(\.method public.*?(?:showAd|loadAd|displayAd|showInterstitial|showBanner)\(.*?\)V)(.*?)(\.end method)',
+              r'\1\n    .registers 1\n\n    return-void\n\3',
+              content,
+              flags=re.DOTALL
+          )
+          
+          with open(path, 'w') as f:
+              f.write(content)
+          print(f"  AdManager patched: {path}")
+          PYEOF
+            done
+            
+            # ── Recompile smali → dex ─────────────────────────────────────────
+            java -jar tools/smali.jar assemble "$SMALI_DIR" -o "$EXTRACT_DIR/classes.dex"
+            
+            # ── Repack into cs3 ───────────────────────────────────────────────
+            rm -f "$CS3"
+            cd "$EXTRACT_DIR"
+            zip -q -r "$OLDPWD/$CS3" .
+            cd "$OLDPWD"
+            
+            echo "  Patched and repacked: $CS3"
+          }
+          
+          # Run patch on every cs3 that was downloaded (check if newer than our copy)
+          CASTLE_VER="${{ steps.fetch_versions.outputs.castle_ver }}"
+          MY_CASTLE_VER="${{ steps.fetch_versions.outputs.my_castle_ver }}"
+          [ "$CASTLE_VER" != "$MY_CASTLE_VER" ] && patch_plugin "CastleTvProvider.cs3"
+          
+          CNCVERSE_VER="${{ steps.fetch_versions.outputs.cncverse_ver }}"
+          MY_CNCVERSE_VER="${{ steps.fetch_versions.outputs.my_cncverse_ver }}"
+          [ "$CNCVERSE_VER" != "$MY_CNCVERSE_VER" ] && patch_plugin "CNC Verse.cs3"
+          
+          CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.cncverse_mob_ver }}"
+          MY_CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.my_cncverse_mob_ver }}"
+          [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ] && patch_plugin "CNC Verse Mobile.cs3"
+          
+          MOVIEBOX_VER="${{ steps.fetch_versions.outputs.moviebox_ver }}"
+          MY_MOVIEBOX_VER="${{ steps.fetch_versions.outputs.my_moviebox_ver }}"
+          [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ] && patch_plugin "MovieBoxProvider.cs3"
+          
+          MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.movieboxin_ver }}"
+          MY_MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.my_movieboxin_ver }}"
+          [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && patch_plugin "MovieBoxProviderIN.cs3"
+
+      - name: Update plugins.json with new versions, sizes and hashes
+        if: steps.fetch_versions.outputs.needs_update == 'true'
+        run: |
+          python3 - <<'PYEOF'
+          import json, hashlib, os
+          
+          plugin_dir = "."
+          plugins_file = "plugins.json"
+          
+          with open(plugins_file) as f:
+              plugins = json.load(f)
+          
+          upstream_file = "/tmp/upstream_plugins.json"
+          with open(upstream_file) as f:
+              upstream = json.load(f)
+          
+          # Build upstream version lookup
+          upstream_map = {p["internalName"]: p for p in upstream}
+          
+          our_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN"]
+          
+          for plugin in plugins:
+              name = plugin["internalName"]
+              if name not in our_plugins:
+                  continue
+              
+              cs3_name = name + ".cs3"
+              cs3_path = os.path.join(plugin_dir, cs3_name)
+              
+              if not os.path.exists(cs3_path):
+                  continue
+              
+              # Recalculate hash and size from the patched file
+              with open(cs3_path, "rb") as f:
+                  data = f.read()
+              
+              sha256 = hashlib.sha256(data).hexdigest()
+              size = len(data)
+              
+              # Update version from upstream
+              if name in upstream_map:
+                  plugin["version"] = upstream_map[name]["version"]
+              
+              plugin["fileHash"] = f"sha256-{sha256}"
+              plugin["fileSize"] = size
+              
+              print(f"Updated {name}: version={plugin['version']}, size={size}, hash=sha256-{sha256[:16]}...")
+          
+          with open(plugins_file, "w") as f:
+              json.dump(plugins, f, indent=4)
+          
+          print("plugins.json updated")
+          PYEOF
+
+      - name: Commit and push updated plugins
+        if: steps.fetch_versions.outputs.needs_update == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add *.cs3 plugins.json
+          
+          # Build commit message listing what changed
+          MSG="Auto-update: patch & sync plugins"$'\n'$'\n'
+          
+          CASTLE_VER="${{ steps.fetch_versions.outputs.castle_ver }}"
+          MY_CASTLE_VER="${{ steps.fetch_versions.outputs.my_castle_ver }}"
+          [ "$CASTLE_VER" != "$MY_CASTLE_VER" ] && MSG+="- CastleTvProvider v$MY_CASTLE_VER → v$CASTLE_VER"$'\n'
+          
+          CNCVERSE_VER="${{ steps.fetch_versions.outputs.cncverse_ver }}"
+          MY_CNCVERSE_VER="${{ steps.fetch_versions.outputs.my_cncverse_ver }}"
+          [ "$CNCVERSE_VER" != "$MY_CNCVERSE_VER" ] && MSG+="- CNC Verse v$MY_CNCVERSE_VER → v$CNCVERSE_VER"$'\n'
+          
+          CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.cncverse_mob_ver }}"
+          MY_CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.my_cncverse_mob_ver }}"
+          [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ] && MSG+="- CNC Verse Mobile v$MY_CNCVERSE_MOB_VER → v$CNCVERSE_MOB_VER"$'\n'
+          
+          MOVIEBOX_VER="${{ steps.fetch_versions.outputs.moviebox_ver }}"
+          MY_MOVIEBOX_VER="${{ steps.fetch_versions.outputs.my_moviebox_ver }}"
+          [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ] && MSG+="- MovieBoxProvider v$MY_MOVIEBOX_VER → v$MOVIEBOX_VER"$'\n'
+          
+          MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.movieboxin_ver }}"
+          MY_MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.my_movieboxin_ver }}"
+          [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && MSG+="- MovieBoxProviderIN v$MY_MOVIEBOXIN_VER → v$MOVIEBOXIN_VER"$'\n'
+          
+          MSG+=$'\n'"Donation popups, ads and subscription dialogs stripped."
+          
+          git diff --cached --quiet || git commit -m "$MSG"
+          git push origin builds
+          echo "Pushed updated plugins to builds branch"
+
+      - name: No updates needed
+        if: steps.fetch_versions.outputs.needs_update != 'true'
+        run: echo "All plugins are already up to date. Nothing to do."
