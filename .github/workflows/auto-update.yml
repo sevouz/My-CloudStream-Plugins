@@ -90,39 +90,39 @@ jobs:
           
           CASTLE_VER="${{ steps.fetch_versions.outputs.castle_ver }}"
           MY_CASTLE_VER="${{ steps.fetch_versions.outputs.my_castle_ver }}"
-          [ "$CASTLE_VER" != "$MY_CASTLE_VER" ] && \
-            curl -L "$BASE_URL/CastleTvProvider.cs3" -o "CastleTvProvider.cs3" && \
-            echo "Downloaded CastleTvProvider.cs3"
+          if [ "$CASTLE_VER" != "$MY_CASTLE_VER" ]; then
+            curl -L "$BASE_URL/CastleTvProvider.cs3" -o "CastleTvProvider.cs3" && echo "Downloaded CastleTvProvider.cs3"
+          fi
           
           CNCVERSE_VER="${{ steps.fetch_versions.outputs.cncverse_ver }}"
           MY_CNCVERSE_VER="${{ steps.fetch_versions.outputs.my_cncverse_ver }}"
-          [ "$CNCVERSE_VER" != "$MY_CNCVERSE_VER" ] && \
-            curl -L "$BASE_URL/CNC%20Verse.cs3" -o "CNC Verse.cs3" && \
-            echo "Downloaded CNC Verse.cs3"
+          if [ "$CNCVERSE_VER" != "$MY_CNCVERSE_VER" ]; then
+            curl -L "$BASE_URL/CNC%20Verse.cs3" -o "CNC Verse.cs3" && echo "Downloaded CNC Verse.cs3"
+          fi
           
           CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.cncverse_mob_ver }}"
           MY_CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.my_cncverse_mob_ver }}"
-          [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ] && \
-            curl -L "$BASE_URL/CNC%20Verse%20Mobile.cs3" -o "CNC Verse Mobile.cs3" && \
-            echo "Downloaded CNC Verse Mobile.cs3"
+          if [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ]; then
+            curl -L "$BASE_URL/CNC%20Verse%20Mobile.cs3" -o "CNC Verse Mobile.cs3" && echo "Downloaded CNC Verse Mobile.cs3"
+          fi
           
           MOVIEBOX_VER="${{ steps.fetch_versions.outputs.moviebox_ver }}"
           MY_MOVIEBOX_VER="${{ steps.fetch_versions.outputs.my_moviebox_ver }}"
-          [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ] && \
-            curl -L "$BASE_URL/MovieBoxProvider.cs3" -o "MovieBoxProvider.cs3" && \
-            echo "Downloaded MovieBoxProvider.cs3"
+          if [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ]; then
+            curl -L "$BASE_URL/MovieBoxProvider.cs3" -o "MovieBoxProvider.cs3" && echo "Downloaded MovieBoxProvider.cs3"
+          fi
           
           MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.movieboxin_ver }}"
           MY_MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.my_movieboxin_ver }}"
-          [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && \
-            curl -L "$BASE_URL/MovieBoxProviderIN.cs3" -o "MovieBoxProviderIN.cs3" && \
-            echo "Downloaded MovieBoxProviderIN.cs3"
+          if [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ]; then
+            curl -L "$BASE_URL/MovieBoxProviderIN.cs3" -o "MovieBoxProviderIN.cs3" && echo "Downloaded MovieBoxProviderIN.cs3"
+          fi
           
           ANIKOTO_VER="${{ steps.fetch_versions.outputs.anikoto_ver }}"
           MY_ANIKOTO_VER="${{ steps.fetch_versions.outputs.my_anikoto_ver }}"
-          [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ] && \
-            curl -L "$PHISHER_URL/AniKoto.cs3" -o "AniKoto.cs3" && \
-            echo "Downloaded AniKoto.cs3"
+          if [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ]; then
+            curl -L "$PHISHER_URL/AniKoto.cs3" -o "AniKoto.cs3" && echo "Downloaded AniKoto.cs3"
+          fi
 
       - name: Patch all plugins (remove popups, ads, donation dialogs)
         if: steps.fetch_versions.outputs.needs_update == 'true'
