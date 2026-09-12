@@ -162,15 +162,15 @@ jobs:
           
           # Methods to kill — replace entire body with return-void
           methods_to_kill = [
-              r'(\.method public final checkAndShow\(Ljava/lang/String;\)V)',
-              r'(\.method public final showNow\(Ljava/lang/String;\)V)',
-              r'(\.method public final resetCooldown\(Landroid/content/Context;\)V)',
+              (r'\.method public final checkAndShow\(Ljava/lang/String;\)V', 2),
+              (r'\.method public final showNow\(Ljava/lang/String;\)V', 2),
+              (r'\.method public final resetCooldown\(Landroid/content/Context;\)V', 2),
           ]
           
-          for pattern in methods_to_kill:
+          for pattern, reg_count in methods_to_kill:
               content = re.sub(
-                  pattern + r'(.*?)(\.end method)',
-                  r'\1\n    .registers 2\n    .param p1\n\n    return-void\n\3',
+                  r'(' + pattern + r').*?(\.end method)',
+                  r'\1\n    .registers ' + str(reg_count) + r'\n    .param p1\n\n    return-void\n\2',
                   content,
                   flags=re.DOTALL
               )
@@ -194,19 +194,20 @@ jobs:
               content = f.read()
           
           methods_to_kill = [
-              r'(\.method public onCreateView\(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;\)Landroid/view/View;)',
-              r'(\.method public onStart\(\)V)',
-              r'(\.method public onCreate\(Landroid/os/Bundle;\)V)',
+              (r'\.method public onCreateView\(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;\)Landroid/view/View;', 4, 'object'),
+              (r'\.method public onStart\(\)V', 1, 'void'),
+              (r'\.method public onCreate\(Landroid/os/Bundle;\)V', 2, 'void'),
           ]
           
-          for pattern in methods_to_kill:
-              # onCreateView must return null (object), others return void
-              if 'View;)' in pattern:
-                  replacement = r'\1\n    .registers 2\n\n    const/4 v0, 0x0\n    return-object v0\n\2'
+          for pattern, reg_count, ret_type in methods_to_kill:
+              if ret_type == 'object':
+                  replacement = r'\1\n    .registers ' + str(reg_count) + r'\n    .param p1\n    .param p2\n    .param p3\n\n    const/4 v0, 0x0\n    return-object v0\n\2'
               else:
-                  replacement = r'\1\n    .registers 1\n\n    return-void\n\2'
+                  params = '\n    .param p1' if reg_count > 1 else ''
+                  replacement = r'\1\n    .registers ' + str(reg_count) + params + r'\n\n    return-void\n\2'
+              
               content = re.sub(
-                  pattern + r'(.*?)(\.end method)',
+                  r'(' + pattern + r').*?(\.end method)',
                   replacement,
                   content,
                   flags=re.DOTALL
