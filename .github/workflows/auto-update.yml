@@ -307,6 +307,132 @@ jobs:
           MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.movieboxin_ver }}"
           MY_MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.my_movieboxin_ver }}"
           [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && patch_plugin "MovieBoxProviderIN.cs3"
+          
+          # ── Patch phisher98 plugins (different donation system) ───────────
+          patch_phisher_plugin() {
+            local CS3="$1"
+            echo "--- Patching phisher98 plugin: $CS3 ---"
+            
+            local WORK_DIR="/tmp/patch_$(basename "$CS3" .cs3)"
+            local SMALI_DIR="$WORK_DIR/smali"
+            local EXTRACT_DIR="$WORK_DIR/extracted"
+            
+            rm -rf "$WORK_DIR"
+            mkdir -p "$EXTRACT_DIR" "$SMALI_DIR"
+            
+            unzip -q "$CS3" -d "$EXTRACT_DIR"
+            
+            if [ ! -f "$EXTRACT_DIR/classes.dex" ]; then
+              echo "  No classes.dex found, skipping"
+              return
+            fi
+            
+            java -jar tools/baksmali.jar d "$EXTRACT_DIR/classes.dex" -o "$SMALI_DIR"
+            
+            # Patch phisher98 DonationManager
+            DM="$SMALI_DIR/com/phisher98/donation/DonationManager.smali"
+            if [ -f "$DM" ]; then
+              python3 - "$DM" <<'PYEOF'
+          import re, sys
+          path = sys.argv[1]
+          with open(path, 'r') as f:
+              content = f.read()
+          
+          # Kill checkAndShow
+          content = re.sub(
+              r'(\.method public final checkAndShow\(Ljava/lang/String;\)V)(.*?)(\.end method)',
+              r'\1\n    .registers 2\n    .param p1\n\n    return-void\n\3',
+              content,
+              flags=re.DOTALL
+          )
+          
+          # Kill showNow
+          content = re.sub(
+              r'(\.method public final showNow\(Landroidx/appcompat/app/AppCompatActivity;Ljava/lang/String;\)V)(.*?)(\.end method)',
+              r'\1\n    .registers 3\n    .param p1\n    .param p2\n\n    return-void\n\3',
+              content,
+              flags=re.DOTALL
+          )
+          
+          with open(path, 'w') as f:
+              f.write(content)
+          print("  phisher98 DonationManager patched")
+          PYEOF
+            fi
+            
+            # Patch DonationBottomSheet
+            DBS="$SMALI_DIR/com/phisher98/donation/DonationBottomSheet.smali"
+            if [ -f "$DBS" ]; then
+              python3 - "$DBS" <<'PYEOF'
+          import re, sys
+          path = sys.argv[1]
+          with open(path, 'r') as f:
+              content = f.read()
+          
+          content = re.sub(
+              r'(\.method public onCreateView\(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;\)Landroid/view/View;)(.*?)(\.end method)',
+              r'\1\n    .registers 4\n    .param p1\n    .param p2\n    .param p3\n\n    const/4 v0, 0x0\n    return-object v0\n\3',
+              content,
+              flags=re.DOTALL
+          )
+          
+          with open(path, 'w') as f:
+              f.write(content)
+          print("  DonationBottomSheet patched")
+          PYEOF
+            fi
+            
+            # Patch DonationDialogFragment
+            DDF="$SMALI_DIR/com/phisher98/donation/DonationDialogFragment.smali"
+            if [ -f "$DDF" ]; then
+              python3 - "$DDF" <<'PYEOF'
+          import re, sys
+          path = sys.argv[1]
+          with open(path, 'r') as f:
+              content = f.read()
+          
+          content = re.sub(
+              r'(\.method public onCreateView\(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;\)Landroid/view/View;)(.*?)(\.end method)',
+              r'\1\n    .registers 4\n    .param p1\n    .param p2\n    .param p3\n\n    const/4 v0, 0x0\n    return-object v0\n\3',
+              content,
+              flags=re.DOTALL
+          )
+          
+          content = re.sub(
+              r'(\.method public onCreate\(Landroid/os/Bundle;\)V)(.*?)(\.end method)',
+              r'\1\n    .registers 2\n    .param p1\n\n    return-void\n\3',
+              content,
+              flags=re.DOTALL
+          )
+          
+          content = re.sub(
+              r'(\.method public onStart\(\)V)(.*?)(\.end method)',
+              r'\1\n    .registers 1\n\n    return-void\n\3',
+              content,
+              flags=re.DOTALL
+          )
+          
+          with open(path, 'w') as f:
+              f.write(content)
+          print("  DonationDialogFragment patched")
+          PYEOF
+            fi
+            
+            java -jar tools/smali.jar assemble "$SMALI_DIR" -o "$EXTRACT_DIR/classes.dex"
+            
+            rm -f "$CS3"
+            cd "$EXTRACT_DIR"
+            zip -q -r "$OLDPWD/$CS3" .
+            cd "$OLDPWD"
+            
+            echo "  Patched and repacked: $CS3"
+          }
+          
+          # Patch AniKoto if updated
+          ANIKOTO_VER="${{ steps.fetch_versions.outputs.anikoto_ver }}"
+          MY_ANIKOTO_VER="${{ steps.fetch_versions.outputs.my_anikoto_ver }}"
+          [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ] && patch_phisher_plugin "AniKoto.cs3"
+
 
       - name: Update plugins.json with new versions, sizes and hashes
         if: steps.fetch_versions.outputs.needs_update == 'true'
