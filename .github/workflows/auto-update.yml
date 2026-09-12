@@ -291,23 +291,33 @@ jobs:
           # Run patch on every cs3 that was downloaded (check if newer than our copy)
           CASTLE_VER="${{ steps.fetch_versions.outputs.castle_ver }}"
           MY_CASTLE_VER="${{ steps.fetch_versions.outputs.my_castle_ver }}"
-          [ "$CASTLE_VER" != "$MY_CASTLE_VER" ] && patch_plugin "CastleTvProvider.cs3"
+          if [ "$CASTLE_VER" != "$MY_CASTLE_VER" ]; then
+            patch_plugin "CastleTvProvider.cs3"
+          fi
           
           CNCVERSE_VER="${{ steps.fetch_versions.outputs.cncverse_ver }}"
           MY_CNCVERSE_VER="${{ steps.fetch_versions.outputs.my_cncverse_ver }}"
-          [ "$CNCVERSE_VER" != "$MY_CNCVERSE_VER" ] && patch_plugin "CNC Verse.cs3"
+          if [ "$CNCVERSE_VER" != "$MY_CNCVERSE_VER" ]; then
+            patch_plugin "CNC Verse.cs3"
+          fi
           
           CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.cncverse_mob_ver }}"
           MY_CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.my_cncverse_mob_ver }}"
-          [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ] && patch_plugin "CNC Verse Mobile.cs3"
+          if [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ]; then
+            patch_plugin "CNC Verse Mobile.cs3"
+          fi
           
           MOVIEBOX_VER="${{ steps.fetch_versions.outputs.moviebox_ver }}"
           MY_MOVIEBOX_VER="${{ steps.fetch_versions.outputs.my_moviebox_ver }}"
-          [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ] && patch_plugin "MovieBoxProvider.cs3"
+          if [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ]; then
+            patch_plugin "MovieBoxProvider.cs3"
+          fi
           
           MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.movieboxin_ver }}"
           MY_MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.my_movieboxin_ver }}"
-          [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && patch_plugin "MovieBoxProviderIN.cs3"
+          if [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ]; then
+            patch_plugin "MovieBoxProviderIN.cs3"
+          fi
           
           # ── Patch phisher98 plugins (different donation system) ───────────
           patch_phisher_plugin() {
@@ -341,16 +351,16 @@ jobs:
           
           # Kill checkAndShow
           content = re.sub(
-              r'(\.method public final checkAndShow\(Ljava/lang/String;\)V)(.*?)(\.end method)',
-              r'\1\n    .registers 2\n    .param p1\n\n    return-void\n\3',
+              r'(\.method public final checkAndShow\(Ljava/lang/String;\)V).*?(\.end method)',
+              r'\1\n    .registers 2\n    .param p1\n\n    return-void\n\2',
               content,
               flags=re.DOTALL
           )
           
           # Kill showNow
           content = re.sub(
-              r'(\.method public final showNow\(Landroidx/appcompat/app/AppCompatActivity;Ljava/lang/String;\)V)(.*?)(\.end method)',
-              r'\1\n    .registers 3\n    .param p1\n    .param p2\n\n    return-void\n\3',
+              r'(\.method public final showNow\(Landroidx/appcompat/app/AppCompatActivity;Ljava/lang/String;\)V).*?(\.end method)',
+              r'\1\n    .registers 3\n    .param p1\n    .param p2\n\n    return-void\n\2',
               content,
               flags=re.DOTALL
           )
@@ -371,8 +381,8 @@ jobs:
               content = f.read()
           
           content = re.sub(
-              r'(\.method public onCreateView\(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;\)Landroid/view/View;)(.*?)(\.end method)',
-              r'\1\n    .registers 4\n    .param p1\n    .param p2\n    .param p3\n\n    const/4 v0, 0x0\n    return-object v0\n\3',
+              r'(\.method public onCreateView\(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;\)Landroid/view/View;).*?(\.end method)',
+              r'\1\n    .registers 4\n    .param p1\n    .param p2\n    .param p3\n\n    const/4 v0, 0x0\n    return-object v0\n\2',
               content,
               flags=re.DOTALL
           )
@@ -393,22 +403,22 @@ jobs:
               content = f.read()
           
           content = re.sub(
-              r'(\.method public onCreateView\(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;\)Landroid/view/View;)(.*?)(\.end method)',
-              r'\1\n    .registers 4\n    .param p1\n    .param p2\n    .param p3\n\n    const/4 v0, 0x0\n    return-object v0\n\3',
+              r'(\.method public onCreateView\(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;\)Landroid/view/View;).*?(\.end method)',
+              r'\1\n    .registers 4\n    .param p1\n    .param p2\n    .param p3\n\n    const/4 v0, 0x0\n    return-object v0\n\2',
               content,
               flags=re.DOTALL
           )
           
           content = re.sub(
-              r'(\.method public onCreate\(Landroid/os/Bundle;\)V)(.*?)(\.end method)',
-              r'\1\n    .registers 2\n    .param p1\n\n    return-void\n\3',
+              r'(\.method public onCreate\(Landroid/os/Bundle;\)V).*?(\.end method)',
+              r'\1\n    .registers 2\n    .param p1\n\n    return-void\n\2',
               content,
               flags=re.DOTALL
           )
           
           content = re.sub(
-              r'(\.method public onStart\(\)V)(.*?)(\.end method)',
-              r'\1\n    .registers 1\n\n    return-void\n\3',
+              r'(\.method public onStart\(\)V).*?(\.end method)',
+              r'\1\n    .registers 1\n\n    return-void\n\2',
               content,
               flags=re.DOTALL
           )
@@ -432,7 +442,9 @@ jobs:
           # Patch AniKoto if updated
           ANIKOTO_VER="${{ steps.fetch_versions.outputs.anikoto_ver }}"
           MY_ANIKOTO_VER="${{ steps.fetch_versions.outputs.my_anikoto_ver }}"
-          [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ] && patch_phisher_plugin "AniKoto.cs3"
+          if [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ]; then
+            patch_phisher_plugin "AniKoto.cs3"
+          fi
 
 
       - name: Update plugins.json with new versions, sizes and hashes
