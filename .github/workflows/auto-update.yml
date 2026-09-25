@@ -2,7 +2,7 @@ name: Auto Update & Patch Plugins
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # runs every 6 hours (at 00:00, 06:00, 12:00, 18:00 UTC)
+    - cron: '0 * * * *'   # runs every hour at the top of the hour
   workflow_dispatch:        # also allows manual trigger from GitHub Actions tab
 
 jobs:
