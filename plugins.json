@@ -43,10 +43,10 @@
     },
     {
         "iconUrl": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/master/Logos/mirrorverse.png",
-        "fileHash": "sha256-34f64c9705ecd4c3c37be3974b70e0ba5965d1361bdc6b85e6e9f945584ed91f",
+        "fileHash": "sha256-313abdca80a72c9514c81d7e4a5cbccb7cb28be8a22057259dd1ba94ae7a5380",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 83111,
+        "fileSize": 83809,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -56,7 +56,7 @@
             "Movie",
             "TvSeries"
         ],
-        "version": 113,
+        "version": 114,
         "internalName": "CNC Verse",
         "description": "Netflix, PrimeVideo, Disney+ Hotstar Contents in Multiple Languages",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC Verse.cs3",
