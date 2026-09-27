@@ -29,7 +29,6 @@ jobs:
           ref: builds
           fetch-depth: 0
         continue-on-error: false
-        retry-on-error: true
 
       - name: Set up Java
         uses: actions/setup-java@v5
