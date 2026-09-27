@@ -145,5 +145,31 @@
     "internalName": "HiAnime",
     "fileSize": 87922,
     "name": "HiAnime"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
+    "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+    "status": 1,
+    "version": 677,
+    "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
+    "fileSize": 1718756,
+    "language": "en",
+    "authors": [
+      "Phisher98",
+      "Hexated"
+    ],
+    "description": "#1 best extention based on MultiAPI",
+    "fileHash": "sha256-44f48f3030dd5494f6be0dd0ac5d8d7149502637ee0153faa8b2fabd087626e0",
+    "internalName": "StreamPlay",
+    "name": "StreamPlay",
+    "tvTypes": [
+      "AsianDrama",
+      "TvSeries",
+      "Anime",
+      "Movie",
+      "Cartoon",
+      "AnimeMovie"
+    ],
+    "apiVersion": 1
   }
 ]
