@@ -85,6 +85,7 @@ jobs:
           # Extract versions for phisher98 plugins
           ANIKOTO_VER=$(jq -r '.[] | select(.internalName=="AniKoto") | .version' /tmp/phisher_plugins.json)
           HIANIME_VER=$(jq -r '.[] | select(.internalName=="HiAnime") | .version' /tmp/phisher_plugins.json)
+          STREAMPLAY_VER=$(jq -r '.[] | select(.internalName=="StreamPlay") | .version' /tmp/phisher_plugins.json)
           
           # Get current versions from our plugins.json
           MY_CASTLE_VER=$(jq -r '.[] | select(.internalName=="CastleTvProvider") | .version' plugins.json)
@@ -94,9 +95,10 @@ jobs:
           MY_MOVIEBOXIN_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProviderIN") | .version' plugins.json)
           MY_ANIKOTO_VER=$(jq -r '.[] | select(.internalName=="AniKoto") | .version' plugins.json)
           MY_HIANIME_VER=$(jq -r '.[] | select(.internalName=="HiAnime") | .version' plugins.json)
+          MY_STREAMPLAY_VER=$(jq -r '.[] | select(.internalName=="StreamPlay") | .version' plugins.json)
           
-          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | AniKoto=$ANIKOTO_VER | HiAnime=$HIANIME_VER"
-          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | AniKoto=$MY_ANIKOTO_VER | HiAnime=$MY_HIANIME_VER"
+          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | AniKoto=$ANIKOTO_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER"
+          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | AniKoto=$MY_ANIKOTO_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER"
           
           # Determine which need updating
           NEEDS_UPDATE=false
@@ -107,6 +109,7 @@ jobs:
           [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && NEEDS_UPDATE=true && echo "MovieBoxProviderIN needs update: $MY_MOVIEBOXIN_VER -> $MOVIEBOXIN_VER"
           [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ] && NEEDS_UPDATE=true && echo "AniKoto needs update: $MY_ANIKOTO_VER -> $ANIKOTO_VER"
           [ "$HIANIME_VER" != "$MY_HIANIME_VER" ] && NEEDS_UPDATE=true && echo "HiAnime needs update: $MY_HIANIME_VER -> $HIANIME_VER"
+          [ "$STREAMPLAY_VER" != "$MY_STREAMPLAY_VER" ] && NEEDS_UPDATE=true && echo "StreamPlay needs update: $MY_STREAMPLAY_VER -> $STREAMPLAY_VER"
           
           echo "needs_update=$NEEDS_UPDATE" >> $GITHUB_OUTPUT
           echo "castle_ver=$CASTLE_VER" >> $GITHUB_OUTPUT
@@ -116,6 +119,7 @@ jobs:
           echo "movieboxin_ver=$MOVIEBOXIN_VER" >> $GITHUB_OUTPUT
           echo "anikoto_ver=$ANIKOTO_VER" >> $GITHUB_OUTPUT
           echo "hianime_ver=$HIANIME_VER" >> $GITHUB_OUTPUT
+          echo "streamplay_ver=$STREAMPLAY_VER" >> $GITHUB_OUTPUT
           echo "my_castle_ver=$MY_CASTLE_VER" >> $GITHUB_OUTPUT
           echo "my_cncverse_ver=$MY_CNCVERSE_VER" >> $GITHUB_OUTPUT
           echo "my_cncverse_mob_ver=$MY_CNCVERSE_MOB_VER" >> $GITHUB_OUTPUT
@@ -123,6 +127,7 @@ jobs:
           echo "my_movieboxin_ver=$MY_MOVIEBOXIN_VER" >> $GITHUB_OUTPUT
           echo "my_anikoto_ver=$MY_ANIKOTO_VER" >> $GITHUB_OUTPUT
           echo "my_hianime_ver=$MY_HIANIME_VER" >> $GITHUB_OUTPUT
+          echo "my_streamplay_ver=$MY_STREAMPLAY_VER" >> $GITHUB_OUTPUT
 
       - name: Download updated plugins from upstream
         if: steps.fetch_versions.outputs.needs_update == 'true'
@@ -193,6 +198,12 @@ jobs:
           MY_HIANIME_VER="${{ steps.fetch_versions.outputs.my_hianime_ver }}"
           if [ "$HIANIME_VER" != "$MY_HIANIME_VER" ]; then
             download_with_retry "$PHISHER_URL/HiAnime.cs3" "HiAnime.cs3"
+          fi
+          
+          STREAMPLAY_VER="${{ steps.fetch_versions.outputs.streamplay_ver }}"
+          MY_STREAMPLAY_VER="${{ steps.fetch_versions.outputs.my_streamplay_ver }}"
+          if [ "$STREAMPLAY_VER" != "$MY_STREAMPLAY_VER" ]; then
+            download_with_retry "$PHISHER_URL/StreamPlay.cs3" "StreamPlay.cs3"
           fi
 
       - name: Patch all plugins (remove popups, ads, donation dialogs)
@@ -523,6 +534,13 @@ jobs:
           if [ "$HIANIME_VER" != "$MY_HIANIME_VER" ]; then
             patch_phisher_plugin "HiAnime.cs3"
           fi
+          
+          # Patch StreamPlay if updated
+          STREAMPLAY_VER="${{ steps.fetch_versions.outputs.streamplay_ver }}"
+          MY_STREAMPLAY_VER="${{ steps.fetch_versions.outputs.my_streamplay_ver }}"
+          if [ "$STREAMPLAY_VER" != "$MY_STREAMPLAY_VER" ]; then
+            patch_phisher_plugin "StreamPlay.cs3"
+          fi
 
 
       - name: Update plugins.json with new versions, sizes and hashes
@@ -551,7 +569,7 @@ jobs:
           phisher_map = {p["internalName"]: p for p in phisher}
           
           cnc_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN"]
-          phisher_plugins = ["AniKoto", "HiAnime"]
+          phisher_plugins = ["AniKoto", "HiAnime", "StreamPlay"]
           
           for plugin in plugins:
               name = plugin["internalName"]
@@ -625,6 +643,10 @@ jobs:
           HIANIME_VER="${{ steps.fetch_versions.outputs.hianime_ver }}"
           MY_HIANIME_VER="${{ steps.fetch_versions.outputs.my_hianime_ver }}"
           [ "$HIANIME_VER" != "$MY_HIANIME_VER" ] && MSG+="- HiAnime v$MY_HIANIME_VER → v$HIANIME_VER"$'\n'
+          
+          STREAMPLAY_VER="${{ steps.fetch_versions.outputs.streamplay_ver }}"
+          MY_STREAMPLAY_VER="${{ steps.fetch_versions.outputs.my_streamplay_ver }}"
+          [ "$STREAMPLAY_VER" != "$MY_STREAMPLAY_VER" ] && MSG+="- StreamPlay v$MY_STREAMPLAY_VER → v$STREAMPLAY_VER"$'\n'
           
           MSG+=$'\n'"Donation popups, ads and subscription dialogs stripped."
           
