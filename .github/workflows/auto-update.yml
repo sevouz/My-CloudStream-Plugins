@@ -2,7 +2,7 @@ name: Auto Update & Patch Plugins
 
 on:
   schedule:
-    - cron: '0 * * * *'   # runs every hour at the top of the hour
+    - cron: '*/5 * * * *'   # runs every 5 minutes (maximum responsiveness)
   workflow_dispatch:        # allows manual trigger from GitHub Actions tab
   push:
     branches:
@@ -16,6 +16,7 @@ permissions:
 jobs:
   update-plugins:
     runs-on: ubuntu-latest
+    timeout-minutes: 15     # prevent hanging (increased for reliability)
     
     # Force the job to always run, even if there are no code changes
     # This prevents GitHub from skipping scheduled runs due to "low activity"
@@ -27,6 +28,8 @@ jobs:
         with:
           ref: builds
           fetch-depth: 0
+        continue-on-error: false
+        retry-on-error: true
 
       - name: Set up Java
         uses: actions/setup-java@v5
@@ -43,12 +46,35 @@ jobs:
 
       - name: Fetch upstream versions from CNCVerse and phisher98
         id: fetch_versions
+        continue-on-error: false
         run: |
+          # Retry logic for network requests
+          retry_curl() {
+            local url="$1"
+            local output="$2"
+            local max_attempts=3
+            local attempt=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "Attempt $attempt: Fetching $url"
+              if curl -f -s --retry 3 --retry-delay 2 "$url" -o "$output"; then
+                echo "✅ Success on attempt $attempt"
+                return 0
+              fi
+              echo "❌ Failed attempt $attempt"
+              attempt=$((attempt + 1))
+              sleep 5
+            done
+            
+            echo "❌ All $max_attempts attempts failed for $url"
+            return 1
+          }
+          
           echo "Fetching upstream plugins.json from NivinCNC..."
-          curl -s "https://raw.githubusercontent.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/builds/plugins.json" -o /tmp/upstream_plugins.json
+          retry_curl "https://raw.githubusercontent.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/builds/plugins.json" "/tmp/upstream_plugins.json"
           
           echo "Fetching upstream plugins.json from phisher98..."
-          curl -s "https://raw.githubusercontent.com/phisher98/cloudstream-extensions-phisher/builds/plugins.json" -o /tmp/phisher_plugins.json
+          retry_curl "https://raw.githubusercontent.com/phisher98/cloudstream-extensions-phisher/builds/plugins.json" "/tmp/phisher_plugins.json"
           
           # Extract versions for CNCVerse plugins
           CASTLE_VER=$(jq -r '.[] | select(.internalName=="CastleTvProvider") | .version' /tmp/upstream_plugins.json)
@@ -101,50 +127,73 @@ jobs:
 
       - name: Download updated plugins from upstream
         if: steps.fetch_versions.outputs.needs_update == 'true'
+        continue-on-error: false
         run: |
+          # Retry download function
+          download_with_retry() {
+            local url="$1"
+            local output="$2"
+            local max_attempts=3
+            local attempt=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "Downloading $output (attempt $attempt)..."
+              if curl -f -L --retry 3 --retry-delay 2 "$url" -o "$output"; then
+                echo "✅ Downloaded $output"
+                return 0
+              fi
+              echo "❌ Failed attempt $attempt for $output"
+              attempt=$((attempt + 1))
+              sleep 3
+            done
+            
+            echo "❌ Failed to download $output after $max_attempts attempts"
+            return 1
+          }
+          
           BASE_URL="https://raw.githubusercontent.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/builds"
           PHISHER_URL="https://raw.githubusercontent.com/phisher98/cloudstream-extensions-phisher/builds"
           
           CASTLE_VER="${{ steps.fetch_versions.outputs.castle_ver }}"
           MY_CASTLE_VER="${{ steps.fetch_versions.outputs.my_castle_ver }}"
           if [ "$CASTLE_VER" != "$MY_CASTLE_VER" ]; then
-            curl -L "$BASE_URL/CastleTvProvider.cs3" -o "CastleTvProvider.cs3" && echo "Downloaded CastleTvProvider.cs3"
+            download_with_retry "$BASE_URL/CastleTvProvider.cs3" "CastleTvProvider.cs3"
           fi
           
           CNCVERSE_VER="${{ steps.fetch_versions.outputs.cncverse_ver }}"
           MY_CNCVERSE_VER="${{ steps.fetch_versions.outputs.my_cncverse_ver }}"
           if [ "$CNCVERSE_VER" != "$MY_CNCVERSE_VER" ]; then
-            curl -L "$BASE_URL/CNC%20Verse.cs3" -o "CNC Verse.cs3" && echo "Downloaded CNC Verse.cs3"
+            download_with_retry "$BASE_URL/CNC%20Verse.cs3" "CNC Verse.cs3"
           fi
           
           CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.cncverse_mob_ver }}"
           MY_CNCVERSE_MOB_VER="${{ steps.fetch_versions.outputs.my_cncverse_mob_ver }}"
           if [ "$CNCVERSE_MOB_VER" != "$MY_CNCVERSE_MOB_VER" ]; then
-            curl -L "$BASE_URL/CNC%20Verse%20Mobile.cs3" -o "CNC Verse Mobile.cs3" && echo "Downloaded CNC Verse Mobile.cs3"
+            download_with_retry "$BASE_URL/CNC%20Verse%20Mobile.cs3" "CNC Verse Mobile.cs3"
           fi
           
           MOVIEBOX_VER="${{ steps.fetch_versions.outputs.moviebox_ver }}"
           MY_MOVIEBOX_VER="${{ steps.fetch_versions.outputs.my_moviebox_ver }}"
           if [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ]; then
-            curl -L "$BASE_URL/MovieBoxProvider.cs3" -o "MovieBoxProvider.cs3" && echo "Downloaded MovieBoxProvider.cs3"
+            download_with_retry "$BASE_URL/MovieBoxProvider.cs3" "MovieBoxProvider.cs3"
           fi
           
           MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.movieboxin_ver }}"
           MY_MOVIEBOXIN_VER="${{ steps.fetch_versions.outputs.my_movieboxin_ver }}"
           if [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ]; then
-            curl -L "$BASE_URL/MovieBoxProviderIN.cs3" -o "MovieBoxProviderIN.cs3" && echo "Downloaded MovieBoxProviderIN.cs3"
+            download_with_retry "$BASE_URL/MovieBoxProviderIN.cs3" "MovieBoxProviderIN.cs3"
           fi
           
           ANIKOTO_VER="${{ steps.fetch_versions.outputs.anikoto_ver }}"
           MY_ANIKOTO_VER="${{ steps.fetch_versions.outputs.my_anikoto_ver }}"
           if [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ]; then
-            curl -L "$PHISHER_URL/AniKoto.cs3" -o "AniKoto.cs3" && echo "Downloaded AniKoto.cs3"
+            download_with_retry "$PHISHER_URL/AniKoto.cs3" "AniKoto.cs3"
           fi
           
           HIANIME_VER="${{ steps.fetch_versions.outputs.hianime_ver }}"
           MY_HIANIME_VER="${{ steps.fetch_versions.outputs.my_hianime_ver }}"
           if [ "$HIANIME_VER" != "$MY_HIANIME_VER" ]; then
-            curl -L "$PHISHER_URL/HiAnime.cs3" -o "HiAnime.cs3" && echo "Downloaded HiAnime.cs3"
+            download_with_retry "$PHISHER_URL/HiAnime.cs3" "HiAnime.cs3"
           fi
 
       - name: Patch all plugins (remove popups, ads, donation dialogs)
@@ -540,6 +589,7 @@ jobs:
 
       - name: Commit and push updated plugins
         if: steps.fetch_versions.outputs.needs_update == 'true'
+        continue-on-error: false
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -579,8 +629,36 @@ jobs:
           
           MSG+=$'\n'"Donation popups, ads and subscription dialogs stripped."
           
+          # Retry push with exponential backoff
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=5
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "Push attempt $attempt..."
+              if git push origin builds; then
+                echo "✅ Push successful on attempt $attempt"
+                return 0
+              fi
+              
+              echo "❌ Push failed on attempt $attempt, retrying in ${wait_time}s..."
+              sleep $wait_time
+              
+              # Pull latest changes before retry
+              echo "Pulling latest changes..."
+              git pull --rebase origin builds || true
+              
+              attempt=$((attempt + 1))
+              wait_time=$((wait_time * 2))  # exponential backoff
+            done
+            
+            echo "❌ Failed to push after $max_attempts attempts"
+            return 1
+          }
+          
           git diff --cached --quiet || git commit -m "$MSG"
-          git push origin builds
+          push_with_retry
           echo "Pushed updated plugins to builds branch"
 
       - name: No updates needed
