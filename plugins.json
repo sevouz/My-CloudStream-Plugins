@@ -173,7 +173,7 @@
         "apiVersion": 1
     },
     {
-        "iconUrl": "https://www.themoviedb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png",
+        "iconUrl": "https://reanime.to/favicon.ico",
         "tvTypes": [
             "Anime",
             "AnimeMovie",
@@ -195,7 +195,7 @@
         "apiVersion": 1
     },
     {
-        "iconUrl": "https://www.themoviedb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png",
+        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/moviebox.png",
         "tvTypes": [
             "Movie",
             "TvSeries"
