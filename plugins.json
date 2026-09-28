@@ -214,5 +214,29 @@
         "name": "MovieBoxPH",
         "description": "Multi Language Movies and Series Provider (Phisher98 version)",
         "apiVersion": 1
+    },
+    {
+        "iconUrl": "https://github.com/SaurabhKaperwan/CSX/raw/refs/heads/master/CineStream/icon.png",
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "Anime",
+            "AsianDrama",
+            "Torrent"
+        ],
+        "internalName": "CineStream",
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CineStream.cs3",
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "fileSize": 695013,
+        "authors": [
+            "megix"
+        ],
+        "version": 487,
+        "fileHash": "sha256-30dc643628702d6b2fe139339e59996783c95a0c1d41efe0a31872ae4d10908b",
+        "status": 1,
+        "language": "en",
+        "name": "CineStream",
+        "description": "One stop solution for Movies, Series, Anime, AsianDrama and Torrents",
+        "apiVersion": 1
     }
 ]
