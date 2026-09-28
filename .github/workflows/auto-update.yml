@@ -1,8 +1,8 @@
 name: Auto Update & Patch Plugins
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'   # runs every 5 minutes (maximum responsiveness)
+  repository_dispatch:      # triggered by external cron service (cron-job.org)
+    types: [update-plugins]
   workflow_dispatch:        # allows manual trigger from GitHub Actions tab
   push:
     branches:
@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15     # prevent hanging (increased for reliability)
     
-    # Force the job to always run, even if there are no code changes
-    # This prevents GitHub from skipping scheduled runs due to "low activity"
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || github.event_name == 'push'
+    # Force the job to always run
+    # Triggered by: external cron (cron-job.org), manual, or workflow changes
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch' || github.event_name == 'push'
 
     steps:
       - name: Checkout builds branch
