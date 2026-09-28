@@ -3,7 +3,8 @@
 ## Installation URL
 
 ```
-https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/refs/heads/builds/plugins.json
+https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC.json
+
 ```
 
 Copy and paste this URL into CloudStream → Settings → Extensions → Add Repository
