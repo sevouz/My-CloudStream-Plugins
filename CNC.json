@@ -1,7 +1,7 @@
 {
   "name": "My CloudStream Plugins",
   "iconUrl": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/refs/heads/builds/icon.png",
-  "description": "CastleTV, CNC Verse and MovieBox Plugins",
+  "description": "11 plugins: CNC Verse, phisher98, and Megix repos - All ads/donations removed",
   "manifestVersion": 1,
   "pluginLists": [
     "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/plugins.json"
