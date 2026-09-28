@@ -3,7 +3,14 @@
 ## Installation URL
 
 ```
-https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/refs/heads/builds/plugins.json
+https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/plugins.json
 ```
 
-Copy and paste this URL into CloudStream → Settings → Extensions → Add Repository
+**How to Install:**
+1. Open CloudStream app
+2. Go to Settings → Extensions
+3. Click "Add Repository" (+ button)
+4. Paste the URL above
+5. Click OK
+
+Your 8 plugins will be available to install!
