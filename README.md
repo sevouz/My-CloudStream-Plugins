@@ -3,7 +3,7 @@
 ## Installation URL
 
 ```
-https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/plugins.json
+https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC.json
 ```
 
 **How to Install:**
