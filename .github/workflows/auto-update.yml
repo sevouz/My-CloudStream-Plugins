@@ -616,12 +616,18 @@ jobs:
           with open(phisher_file) as f:
               phisher = json.load(f)
           
+          csx_file = "/tmp/csx_plugins.json"
+          with open(csx_file) as f:
+              csx = json.load(f)
+          
           # Build upstream version lookup
           upstream_map = {p["internalName"]: p for p in upstream}
           phisher_map = {p["internalName"]: p for p in phisher}
+          csx_map = {p["internalName"]: p for p in csx}
           
           cnc_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN"]
           phisher_plugins = ["AniKoto", "HiAnime", "StreamPlay", "Reanime", "MovieBoxProviderPH"]
+          csx_plugins = ["CineStream"]
           
           for plugin in plugins:
               name = plugin["internalName"]
@@ -642,8 +648,13 @@ jobs:
               # Update version from appropriate upstream
               if name in cnc_plugins and name in upstream_map:
                   plugin["version"] = upstream_map[name]["version"]
-              elif name in phisher_plugins and name in phisher_map:
-                  plugin["version"] = phisher_map[name]["version"]
+              elif name in phisher_plugins:
+                  # Special case: MovieBoxProviderPH is renamed from MovieBoxProvider in phisher98
+                  upstream_name = "MovieBoxProvider" if name == "MovieBoxProviderPH" else name
+                  if upstream_name in phisher_map:
+                      plugin["version"] = phisher_map[upstream_name]["version"]
+              elif name in csx_plugins and name in csx_map:
+                  plugin["version"] = csx_map[name]["version"]
               
               plugin["fileHash"] = f"sha256-{sha256}"
               plugin["fileSize"] = size
