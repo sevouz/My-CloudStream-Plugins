@@ -203,12 +203,12 @@
         "internalName": "MovieBoxProviderPH",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProviderPH.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 157348,
+        "fileSize": 157355,
         "authors": [
             "Phisher98"
         ],
         "version": 34,
-        "fileHash": "sha256-78200e70b6a14c17405d5add8be07083bb255cbd3c7470dcd6610d6316ca753a",
+        "fileHash": "sha256-ff2f5ebc759ad903a9cd00e4adb2614dc87f6684da161c89c2324096a0838f71",
         "status": 1,
         "language": "en",
         "name": "MovieBoxPH",
