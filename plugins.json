@@ -150,16 +150,16 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "version": 681,
+        "version": 682,
         "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
-        "fileSize": 1755034,
+        "fileSize": 1804421,
         "language": "en",
         "authors": [
             "Phisher98",
             "Hexated"
         ],
         "description": "#1 best extention based on MultiAPI",
-        "fileHash": "sha256-4d2caf24cd67387349b08fd38d25bdca8f5b71b7091706a28d90d7bdaad028ab",
+        "fileHash": "sha256-eda11e2bf96060a2f62d4fabb2cb4bc9e8ff675ef00212193d2397610043aef3",
         "internalName": "StreamPlay",
         "name": "StreamPlay",
         "tvTypes": [
@@ -208,7 +208,7 @@
             "Phisher98"
         ],
         "version": 34,
-        "fileHash": "sha256-c7a96f8bc255195aad648ade65e56573f937e0ef3186adeb630a59293bfd096d",
+        "fileHash": "sha256-ea6b351690d25beb9f4ba33f2f98aae10fb080265fe5a21f144dea19d0316872",
         "status": 1,
         "language": "en",
         "name": "MovieBoxPH",
