@@ -1,10 +1,10 @@
 [
     {
         "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
-        "fileHash": "sha256-432152f3036b94fab55644b8ca07707c61133cbc54ec24f87380db470aeb6da5",
+        "fileHash": "sha256-5d0982387fb98cf5bd96db65584fabd998ac0e945dbf01130818f496cb275a4a",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 70101,
+        "fileSize": 79731,
         "status": 1,
         "language": "en",
         "authors": [
@@ -14,7 +14,7 @@
             "Anime",
             "AnimeMovie"
         ],
-        "version": 5,
+        "version": 6,
         "internalName": "AniKoto",
         "description": "AniKoto - Anime streaming",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniKoto.cs3",
@@ -150,16 +150,16 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "version": 683,
+        "version": 684,
         "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
-        "fileSize": 1871221,
+        "fileSize": 1880180,
         "language": "en",
         "authors": [
             "Phisher98",
             "Hexated"
         ],
         "description": "#1 best extention based on MultiAPI",
-        "fileHash": "sha256-add43ac8319f32665a02abeaeaf99b93a83c95906dccc7c43be0ce3d5d87c2c2",
+        "fileHash": "sha256-f6507e8fdafc56e46e5afca58db132db1bee2742b84c1fea18f8d53636eeda72",
         "internalName": "StreamPlay",
         "name": "StreamPlay",
         "tvTypes": [
