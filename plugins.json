@@ -182,12 +182,12 @@
         "internalName": "Reanime",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Reanime.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 112062,
+        "fileSize": 111956,
         "authors": [
             "Phisher98"
         ],
-        "version": 2,
-        "fileHash": "sha256-b266d6cc427da6d6d636b4647d8c3e9c5a45f7fe78488811b5b41e0b74047237",
+        "version": 3,
+        "fileHash": "sha256-c558e66049552c919b21b5cb8ecf9d1387d6616e119f9e220837806e5b5ce479",
         "status": 1,
         "language": "en",
         "name": "Reanime",
