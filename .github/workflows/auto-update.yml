@@ -14,7 +14,7 @@ permissions:
   contents: write           # needed to commit to builds branch
 
 jobs:
-  update-plugins:
+  Auto-Update-and-Patch-Plugins:
     runs-on: ubuntu-latest
     timeout-minutes: 15     # prevent hanging (increased for reliability)
     
