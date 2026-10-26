@@ -153,7 +153,7 @@ jobs:
           echo "my_movieboxph_ver=$MY_MOVIEBOXPH_VER" >> $GITHUB_OUTPUT
           echo "my_anivortex_ver=$MY_ANIVORTEX_VER" >> $GITHUB_OUTPUT
           echo "my_cinestream_ver=$MY_CINESTREAM_VER" >> $GITHUB_OUTPUT
-          - name: Download updated plugins from upstream
+      - name: Download updated plugins from upstream
         if: steps.fetch_versions.outputs.needs_update == 'true'
         continue-on-error: false
         run: |
@@ -253,8 +253,8 @@ jobs:
           if [ "$CINESTREAM_VER" != "$MY_CINESTREAM_VER" ]; then
             download_with_retry "https://raw.githubusercontent.com/SaurabhKaperwan/CSX/builds/CineStream.cs3" "CineStream.cs3"
           fi
-          
-          - name: Patch all plugins (remove popups, ads, donation dialogs)
+
+      - name: Patch all plugins (remove popups, ads, donation dialogs)
         if: steps.fetch_versions.outputs.needs_update == 'true'
         run: |
           patch_plugin() {
@@ -728,8 +728,8 @@ jobs:
           if [ "$ANIVORTEX_VER" != "$MY_ANIVORTEX_VER" ]; then
             patch_phisher_plugin "AniVortex.cs3"
           fi
-          
-          - name: Update plugins.json with new versions, sizes and hashes
+
+      - name: Update plugins.json with new versions, sizes and hashes
         if: steps.fetch_versions.outputs.needs_update == 'true'
         run: |
           python3 - <<'PYEOF'
