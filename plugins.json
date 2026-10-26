@@ -203,12 +203,12 @@
         "internalName": "MovieBoxProviderPH",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProviderPH.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 149675,
+        "fileSize": 153768,
         "authors": [
             "Phisher98"
         ],
-        "version": 38,
-        "fileHash": "sha256-d43d715b8ea0102be8430495581f57967bfcf8191e3c5e01660f9142bed4d2bd",
+        "version": 39,
+        "fileHash": "sha256-1987a3da9ca123c3cbf50c322b8ebfc856d095cbffb7467a6a3adf8f21db8d13",
         "status": 1,
         "language": "en",
         "name": "MovieBoxPH",
@@ -246,7 +246,7 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniVortex.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "description": "AniVortex — Anime, movies & TV series streaming",
+        "description": "AniVortex \u2014 Anime, movies & TV series streaming",
         "tvTypes": [
             "Anime",
             "AnimeMovie",
