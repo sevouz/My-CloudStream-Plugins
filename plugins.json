@@ -240,26 +240,6 @@
         "apiVersion": 1
     },
     {
-        "iconUrl": "https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Gold_HD.png",
-        "tvTypes": [
-            "Live"
-        ],
-        "internalName": "LiveTgTv",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/LiveTgTv.cs3",
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 40648,
-        "authors": [
-            "KSHITIJ8473"
-        ],
-        "version": 1,
-        "fileHash": "sha256-cc08b911b264d4835a1cfcb409ed02dcad2266cef335fb07e216670dfb8140af",
-        "status": 1,
-        "language": "hi",
-        "name": "LiveTgTv",
-        "description": "INDIAN TV CHANNELS",
-        "apiVersion": 1
-    },
-    {
         "authors": [
             "Phisher98"
         ],
