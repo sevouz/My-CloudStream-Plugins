@@ -251,7 +251,7 @@
         "authors": [
             "KSHITIJ8473"
         ],
-        "version": 3,
+        "version": 1,
         "fileHash": "sha256-cc08b911b264d4835a1cfcb409ed02dcad2266cef335fb07e216670dfb8140af",
         "status": 1,
         "language": "hi",
@@ -266,7 +266,7 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniVortex.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "description": "AniVortex \u2014 Anime, movies & TV series streaming",
+        "description": "AniVortex — Anime, movies & TV series streaming",
         "tvTypes": [
             "Anime",
             "AnimeMovie",
