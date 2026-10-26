@@ -109,7 +109,6 @@ jobs:
           MY_MOVIEBOXPH_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProviderPH") | .version' plugins.json)
           MY_ANIVORTEX_VER=$(jq -r '.[] | select(.internalName=="AniVortex") | .version' plugins.json)
           MY_CINESTREAM_VER=$(jq -r '.[] | select(.internalName=="CineStream") | .version' plugins.json)
-          | .version' plugins.json)
           
           echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | AniKoto=$ANIKOTO_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER | Reanime=$REANIME_VER | MovieBoxPH=$MOVIEBOXPH_VER | AniVortex=$ANIVORTEX_VER | CineStream=$CINESTREAM_VER"
           echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | AniKoto=$MY_ANIKOTO_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER | Reanime=$MY_REANIME_VER | MovieBoxPH=$MY_MOVIEBOXPH_VER | AniVortex=$MY_ANIVORTEX_VER | CineStream=$MY_CINESTREAM_VER"
