@@ -1,10 +1,10 @@
 [
     {
         "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
-        "fileHash": "sha256-dbadbe7a07e9478691e4a8dc5074714af19c78b3aec958896c3f5f577e3ae573",
+        "fileHash": "sha256-5d0982387fb98cf5bd96db65584fabd998ac0e945dbf01130818f496cb275a4a",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 70286,
+        "fileSize": 79731,
         "status": 1,
         "language": "en",
         "authors": [
@@ -14,7 +14,7 @@
             "Anime",
             "AnimeMovie"
         ],
-        "version": 4,
+        "version": 6,
         "internalName": "AniKoto",
         "description": "AniKoto - Anime streaming",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniKoto.cs3",
@@ -22,10 +22,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CastleTvProvider/icon.png",
-        "fileHash": "sha256-2bf473fef29eed25c8f616d830da8604cab317eb94b527f8e9200c60ab717463",
+        "fileHash": "sha256-2c2d82a4577dd90f9d22ced6d277fb02dfdefe063c978eae1f49038392eff53c",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 78159,
+        "fileSize": 79180,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -35,7 +35,7 @@
             "Movie",
             "TvSeries"
         ],
-        "version": 40,
+        "version": 41,
         "internalName": "CastleTvProvider",
         "description": "Castle TV Movies and Series Provider",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CastleTvProvider.cs3",
@@ -43,10 +43,10 @@
     },
     {
         "iconUrl": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/master/Logos/mirrorverse.png",
-        "fileHash": "sha256-313abdca80a72c9514c81d7e4a5cbccb7cb28be8a22057259dd1ba94ae7a5380",
+        "fileHash": "sha256-0eb18fe227c7ac282de20cfeb6315a20e78ed83a47eb9fc0d6f394df2988689e",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 83809,
+        "fileSize": 83822,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -56,7 +56,7 @@
             "Movie",
             "TvSeries"
         ],
-        "version": 114,
+        "version": 115,
         "internalName": "CNC Verse",
         "description": "Netflix, PrimeVideo, Disney+ Hotstar Contents in Multiple Languages",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC Verse.cs3",
@@ -64,10 +64,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CNC%20Verse%20Mobile/logo.jpeg",
-        "fileHash": "sha256-c5c7d94478c3ca1968cdd17ed65047c34d7a0c2e733e3b17bc6e26dffad37c03",
+        "fileHash": "sha256-690cf54b624050118d6093f4f6591eb2c324317579309fdb7c25612b38b321bb",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 88084,
+        "fileSize": 89112,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -77,7 +77,7 @@
             "Movie",
             "TvSeries"
         ],
-        "version": 10,
+        "version": 12,
         "internalName": "CNC Verse Mobile",
         "description": "NetMirror Mobile API",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC Verse Mobile.cs3",
@@ -85,31 +85,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/MovieBoxProvider/icon.png",
-        "fileHash": "sha256-8f3906abf576eafade4a3584a5cffb893556ac59844f23e18d8695da24826179",
+        "fileHash": "sha256-80748e413ff019b48d35b2363762a13912fd74fb59c828964f784c213b779ab8",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 85363,
-        "status": 1,
-        "language": "ta",
-        "authors": [
-            "NivinCNC"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries"
-        ],
-        "version": 51,
-        "internalName": "MovieBoxProvider",
-        "description": "Multi Language Movies and Series Provider",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProvider.cs3",
-        "name": "MovieBoxProvider"
-    },
-    {
-        "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/MovieBoxProviderIN/icon.png",
-        "fileHash": "sha256-bdd15ef7c78dafaf54a7bf89d51e1d9dd53c9e662238a89ab5b2d098421fe9d6",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 83758,
+        "fileSize": 86502,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -120,6 +99,27 @@
             "TvSeries"
         ],
         "version": 53,
+        "internalName": "MovieBoxProvider",
+        "description": "Multi Language Movies and Series Provider",
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProvider.cs3",
+        "name": "MovieBoxProvider"
+    },
+    {
+        "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/MovieBoxProviderIN/icon.png",
+        "fileHash": "sha256-164bee65840f4a419e36aba7858fed21a260c3583896851202ea35abc95e49fb",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "fileSize": 84129,
+        "status": 1,
+        "language": "ta",
+        "authors": [
+            "NivinCNC"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "version": 55,
         "internalName": "MovieBoxProviderIN",
         "description": "Multi Language Movies and Series Provider (Local homepage based on region)",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProviderIN.cs3",
@@ -127,7 +127,7 @@
     },
     {
         "apiVersion": 1,
-        "fileHash": "sha256-819e13d156b8b4b60bd2d26398f032764d05205e627cbfea17ba91a251d7ff50",
+        "fileHash": "sha256-5d994368c54b40291e6b3a25287e71730f1d51e70096348da87d786d943e5cef",
         "status": 1,
         "tvTypes": [
             "Anime",
@@ -140,26 +140,26 @@
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "language": "en",
         "description": null,
-        "version": 1,
+        "version": 2,
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/HiAnime.cs3",
         "internalName": "HiAnime",
-        "fileSize": 87922,
+        "fileSize": 84904,
         "name": "HiAnime"
     },
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "version": 682,
+        "version": 692,
         "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
-        "fileSize": 1804421,
+        "fileSize": 2060473,
         "language": "en",
         "authors": [
             "Phisher98",
             "Hexated"
         ],
         "description": "#1 best extention based on MultiAPI",
-        "fileHash": "sha256-eda11e2bf96060a2f62d4fabb2cb4bc9e8ff675ef00212193d2397610043aef3",
+        "fileHash": "sha256-9c571fea26ca4a36bb06ddee204cb9d526c3ab98eb99cb7c6ddda55d960fd858",
         "internalName": "StreamPlay",
         "name": "StreamPlay",
         "tvTypes": [
@@ -182,12 +182,12 @@
         "internalName": "Reanime",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Reanime.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 112062,
+        "fileSize": 111956,
         "authors": [
             "Phisher98"
         ],
-        "version": 2,
-        "fileHash": "sha256-b266d6cc427da6d6d636b4647d8c3e9c5a45f7fe78488811b5b41e0b74047237",
+        "version": 3,
+        "fileHash": "sha256-c558e66049552c919b21b5cb8ecf9d1387d6616e119f9e220837806e5b5ce479",
         "status": 1,
         "language": "en",
         "name": "Reanime",
@@ -203,12 +203,12 @@
         "internalName": "MovieBoxProviderPH",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProviderPH.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 157355,
+        "fileSize": 149675,
         "authors": [
             "Phisher98"
         ],
-        "version": 36,
-        "fileHash": "sha256-de091e136c93f90c4f2e4e14ec6ac92d95a82703fead8bf2e9de5f4a80afe7d2",
+        "version": 38,
+        "fileHash": "sha256-d43d715b8ea0102be8430495581f57967bfcf8191e3c5e01660f9142bed4d2bd",
         "status": 1,
         "language": "en",
         "name": "MovieBoxPH",
