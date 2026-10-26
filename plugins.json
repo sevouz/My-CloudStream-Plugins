@@ -251,8 +251,8 @@
         "authors": [
             "KSHITIJ8473"
         ],
-        "version": 1,
-        "fileHash": "sha256-215a70e06578b34cf126ad239c39b00d1aca4001cb064d6bf219f1ba08395889",
+        "version": 3,
+        "fileHash": "sha256-cc08b911b264d4835a1cfcb409ed02dcad2266cef335fb07e216670dfb8140af",
         "status": 1,
         "language": "hi",
         "name": "LiveTgTv",
@@ -266,7 +266,7 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniVortex.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "description": "AniVortex — Anime, movies & TV series streaming",
+        "description": "AniVortex \u2014 Anime, movies & TV series streaming",
         "tvTypes": [
             "Anime",
             "AnimeMovie",
@@ -276,11 +276,11 @@
         ],
         "language": "hi",
         "iconUrl": "https://anivortex.in/images/anivortex_logo_transparent.webp",
-        "fileHash": "sha256-5751039f0fbf4f2db6ec7974bbabc85f1801f05b15b968174f2823150d7fdfce",
+        "fileHash": "sha256-5e747e0b8b542c01b9408cf38318d3d11f028f39c0eb2c4642db8e65d6c8f39b",
         "apiVersion": 1,
-        "version": 5,
+        "version": 10,
         "internalName": "AniVortex",
-        "fileSize": 139303,
+        "fileSize": 138392,
         "name": "AniVortex"
     }
 ]
