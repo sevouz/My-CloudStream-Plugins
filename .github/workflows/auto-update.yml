@@ -78,9 +78,6 @@ jobs:
           echo "Fetching upstream plugins.json from CSX (Megix)..."
           retry_curl "https://raw.githubusercontent.com/SaurabhKaperwan/CSX/builds/plugins.json" "/tmp/csx_plugins.json"
           
-          echo "Fetching upstream plugins.json from raghav..."
-          retry_curl "https://raw.githubusercontent.com/KSHITIJ8473/raghav/builds/plugins.json" "/tmp/raghav_plugins.json"
-          
           # Extract versions for CNCVerse plugins
           CASTLE_VER=$(jq -r '.[] | select(.internalName=="CastleTvProvider") | .version' /tmp/upstream_plugins.json)
           CNCVERSE_VER=$(jq -r '.[] | select(.internalName=="CNC Verse") | .version' /tmp/upstream_plugins.json)
@@ -99,9 +96,6 @@ jobs:
           # Extract versions for CSX (Megix) plugins
           CINESTREAM_VER=$(jq -r '.[] | select(.internalName=="CineStream") | .version' /tmp/csx_plugins.json)
           
-          # Extract versions for raghav plugins
-          LIVETGTV_VER=$(jq -r '.[] | select(.internalName=="LiveTgTv") | .version' /tmp/raghav_plugins.json)
-          
           # Get current versions from our plugins.json
           MY_CASTLE_VER=$(jq -r '.[] | select(.internalName=="CastleTvProvider") | .version' plugins.json)
           MY_CNCVERSE_VER=$(jq -r '.[] | select(.internalName=="CNC Verse") | .version' plugins.json)
@@ -115,10 +109,10 @@ jobs:
           MY_MOVIEBOXPH_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProviderPH") | .version' plugins.json)
           MY_ANIVORTEX_VER=$(jq -r '.[] | select(.internalName=="AniVortex") | .version' plugins.json)
           MY_CINESTREAM_VER=$(jq -r '.[] | select(.internalName=="CineStream") | .version' plugins.json)
-          MY_LIVETGTV_VER=$(jq -r '.[] | select(.internalName=="LiveTgTv") | .version' plugins.json)
+          | .version' plugins.json)
           
-          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | AniKoto=$ANIKOTO_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER | Reanime=$REANIME_VER | MovieBoxPH=$MOVIEBOXPH_VER | AniVortex=$ANIVORTEX_VER | CineStream=$CINESTREAM_VER | LiveTgTv=$LIVETGTV_VER"
-          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | AniKoto=$MY_ANIKOTO_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER | Reanime=$MY_REANIME_VER | MovieBoxPH=$MY_MOVIEBOXPH_VER | AniVortex=$MY_ANIVORTEX_VER | CineStream=$MY_CINESTREAM_VER | LiveTgTv=$MY_LIVETGTV_VER"
+          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | AniKoto=$ANIKOTO_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER | Reanime=$REANIME_VER | MovieBoxPH=$MOVIEBOXPH_VER | AniVortex=$ANIVORTEX_VER | CineStream=$CINESTREAM_VER"
+          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | AniKoto=$MY_ANIKOTO_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER | Reanime=$MY_REANIME_VER | MovieBoxPH=$MY_MOVIEBOXPH_VER | AniVortex=$MY_ANIVORTEX_VER | CineStream=$MY_CINESTREAM_VER"
           
           # Determine which need updating
           NEEDS_UPDATE=false
@@ -133,9 +127,7 @@ jobs:
           [ "$REANIME_VER" != "$MY_REANIME_VER" ] && NEEDS_UPDATE=true && echo "Reanime needs update: $MY_REANIME_VER -> $REANIME_VER"
           [ "$MOVIEBOXPH_VER" != "$MY_MOVIEBOXPH_VER" ] && NEEDS_UPDATE=true && echo "MovieBoxPH needs update: $MY_MOVIEBOXPH_VER -> $MOVIEBOXPH_VER"
           [ "$ANIVORTEX_VER" != "$MY_ANIVORTEX_VER" ] && NEEDS_UPDATE=true && echo "AniVortex needs update: $MY_ANIVORTEX_VER -> $ANIVORTEX_VER"
-          [ "$CINESTREAM_VER" != "$MY_CINESTREAM_VER" ] && NEEDS_UPDATE=true && echo "CineStream needs update: $MY_CINESTREAM_VER -> $CINESTREAM_VER"
-          [ "$LIVETGTV_VER" != "$MY_LIVETGTV_VER" ] && NEEDS_UPDATE=true && echo "LiveTgTv needs update: $MY_LIVETGTV_VER -> $LIVETGTV_VER"
-          
+          [ "$CINESTREAM_VER" != "$MY_CINESTREAM_VER" ] && NEEDS_UPDATE=true && echo "CineStream needs update: $MY_CINESTREAM_VER -> $CINESTREAM_VER"          
           echo "needs_update=$NEEDS_UPDATE" >> $GITHUB_OUTPUT
           echo "castle_ver=$CASTLE_VER" >> $GITHUB_OUTPUT
           echo "cncverse_ver=$CNCVERSE_VER" >> $GITHUB_OUTPUT
@@ -149,7 +141,6 @@ jobs:
           echo "movieboxph_ver=$MOVIEBOXPH_VER" >> $GITHUB_OUTPUT
           echo "anivortex_ver=$ANIVORTEX_VER" >> $GITHUB_OUTPUT
           echo "cinestream_ver=$CINESTREAM_VER" >> $GITHUB_OUTPUT
-          echo "livetgtv_ver=$LIVETGTV_VER" >> $GITHUB_OUTPUT
           echo "my_castle_ver=$MY_CASTLE_VER" >> $GITHUB_OUTPUT
           echo "my_cncverse_ver=$MY_CNCVERSE_VER" >> $GITHUB_OUTPUT
           echo "my_cncverse_mob_ver=$MY_CNCVERSE_MOB_VER" >> $GITHUB_OUTPUT
@@ -162,9 +153,7 @@ jobs:
           echo "my_movieboxph_ver=$MY_MOVIEBOXPH_VER" >> $GITHUB_OUTPUT
           echo "my_anivortex_ver=$MY_ANIVORTEX_VER" >> $GITHUB_OUTPUT
           echo "my_cinestream_ver=$MY_CINESTREAM_VER" >> $GITHUB_OUTPUT
-          echo "my_livetgtv_ver=$MY_LIVETGTV_VER" >> $GITHUB_OUTPUT
-
-      - name: Download updated plugins from upstream
+          - name: Download updated plugins from upstream
         if: steps.fetch_versions.outputs.needs_update == 'true'
         continue-on-error: false
         run: |
@@ -265,13 +254,7 @@ jobs:
             download_with_retry "https://raw.githubusercontent.com/SaurabhKaperwan/CSX/builds/CineStream.cs3" "CineStream.cs3"
           fi
           
-          LIVETGTV_VER="${{ steps.fetch_versions.outputs.livetgtv_ver }}"
-          MY_LIVETGTV_VER="${{ steps.fetch_versions.outputs.my_livetgtv_ver }}"
-          if [ "$LIVETGTV_VER" != "$MY_LIVETGTV_VER" ]; then
-            download_with_retry "https://raw.githubusercontent.com/KSHITIJ8473/raghav/builds/LiveTgTv.cs3" "LiveTgTv.cs3"
-          fi
-
-      - name: Patch all plugins (remove popups, ads, donation dialogs)
+          - name: Patch all plugins (remove popups, ads, donation dialogs)
         if: steps.fetch_versions.outputs.needs_update == 'true'
         run: |
           patch_plugin() {
@@ -746,15 +729,7 @@ jobs:
             patch_phisher_plugin "AniVortex.cs3"
           fi
           
-          # Patch LiveTgTv if updated
-          LIVETGTV_VER="${{ steps.fetch_versions.outputs.livetgtv_ver }}"
-          MY_LIVETGTV_VER="${{ steps.fetch_versions.outputs.my_livetgtv_ver }}"
-          if [ "$LIVETGTV_VER" != "$MY_LIVETGTV_VER" ]; then
-            patch_raghav_plugin "LiveTgTv.cs3"
-          fi
-
-
-      - name: Update plugins.json with new versions, sizes and hashes
+          - name: Update plugins.json with new versions, sizes and hashes
         if: steps.fetch_versions.outputs.needs_update == 'true'
         run: |
           python3 - <<'PYEOF'
@@ -779,21 +754,13 @@ jobs:
           with open(csx_file) as f:
               csx = json.load(f)
           
-          raghav_file = "/tmp/raghav_plugins.json"
-          with open(raghav_file) as f:
-              raghav = json.load(f)
-          
           # Build upstream version lookup
           upstream_map = {p["internalName"]: p for p in upstream}
           phisher_map = {p["internalName"]: p for p in phisher}
           csx_map = {p["internalName"]: p for p in csx}
-          raghav_map = {p["internalName"]: p for p in raghav}
-          
           cnc_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN"]
           phisher_plugins = ["AniKoto", "HiAnime", "StreamPlay", "Reanime", "MovieBoxProviderPH", "AniVortex"]
           csx_plugins = ["CineStream"]
-          raghav_plugins = ["LiveTgTv"]
-          
           for plugin in plugins:
               name = plugin["internalName"]
               
@@ -820,9 +787,6 @@ jobs:
                       plugin["version"] = phisher_map[upstream_name]["version"]
               elif name in csx_plugins and name in csx_map:
                   plugin["version"] = csx_map[name]["version"]
-              elif name in raghav_plugins and name in raghav_map:
-                  plugin["version"] = raghav_map[name]["version"]
-              
               plugin["fileHash"] = f"sha256-{sha256}"
               plugin["fileSize"] = size
               
@@ -894,10 +858,7 @@ jobs:
           MY_CINESTREAM_VER="${{ steps.fetch_versions.outputs.my_cinestream_ver }}"
           [ "$CINESTREAM_VER" != "$MY_CINESTREAM_VER" ] && MSG+="- CineStream v$MY_CINESTREAM_VER → v$CINESTREAM_VER"$'\n'
           
-          LIVETGTV_VER="${{ steps.fetch_versions.outputs.livetgtv_ver }}"
-          MY_LIVETGTV_VER="${{ steps.fetch_versions.outputs.my_livetgtv_ver }}"
-          [ "$LIVETGTV_VER" != "$MY_LIVETGTV_VER" ] && MSG+="- LiveTgTv v$MY_LIVETGTV_VER → v$LIVETGTV_VER"$'\n'
-          
+                    
           MSG+=$'\n'"Donation popups, ads and subscription dialogs stripped."
           
           # Retry push with exponential backoff
