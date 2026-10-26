@@ -238,5 +238,25 @@
         "name": "CineStream",
         "description": "One stop solution for Movies, Series, Anime, AsianDrama and Torrents",
         "apiVersion": 1
+    },
+    {
+        "iconUrl": "https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Gold_HD.png",
+        "tvTypes": [
+            "Live"
+        ],
+        "internalName": "LiveTgTv",
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/LiveTgTv.cs3",
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "fileSize": 40216,
+        "authors": [
+            "KSHITIJ8473"
+        ],
+        "version": 3,
+        "fileHash": "sha256-cea7f1476d2146a4eec2a951d2b20c2776823421224ba5ee63f820acc3e08076",
+        "status": 1,
+        "language": "hi",
+        "name": "LiveTgTv",
+        "description": "INDIAN TV CHANNELS",
+        "apiVersion": 1
     }
 ]
