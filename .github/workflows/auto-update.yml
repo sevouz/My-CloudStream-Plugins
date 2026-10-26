@@ -575,6 +575,77 @@ jobs:
             echo "  Patched and repacked: $CS3"
           }
           
+          # ── Patch raghav plugins (generic donation/ad removal) ────────────
+          patch_raghav_plugin() {
+            local CS3="$1"
+            echo "--- Patching raghav plugin: $CS3 ---"
+            
+            local WORK_DIR="/tmp/patch_raghav_$(basename "$CS3" .cs3)"
+            local SMALI_DIR="$WORK_DIR/smali"
+            local EXTRACT_DIR="$WORK_DIR/extracted"
+            
+            rm -rf "$WORK_DIR"
+            mkdir -p "$EXTRACT_DIR" "$SMALI_DIR"
+            
+            unzip -q "$CS3" -d "$EXTRACT_DIR"
+            
+            if [ ! -f "$EXTRACT_DIR/classes.dex" ]; then
+              echo "  No classes.dex, skipping"
+              return
+            fi
+            
+            java -jar tools/baksmali.jar d "$EXTRACT_DIR/classes.dex" -o "$SMALI_DIR"
+            
+            # Search for any donation-related files
+            DONATION_FILES=$(find "$SMALI_DIR" -name "*[Dd]onation*.smali" -o -name "*[Aa]d*.smali" 2>/dev/null || true)
+            
+            if [ -n "$DONATION_FILES" ]; then
+              echo "  Found donation/ad files, patching..."
+              for FILE in $DONATION_FILES; do
+                python3 - "$FILE" <<'PYEOF'
+          import re, sys
+          path = sys.argv[1]
+          try:
+              with open(path, 'r') as f:
+                  content = f.read()
+              
+              # Kill any void methods (checkAndShow, showNow, etc.)
+              content = re.sub(
+                  r'(\.method public.*?\)V).*?(\.end method)',
+                  r'\1\n    .registers 1\n\n    return-void\n\2',
+                  content,
+                  flags=re.DOTALL
+              )
+              
+              # Kill any View-returning methods (onCreateView)
+              content = re.sub(
+                  r'(\.method public.*?\)Landroid/view/View;).*?(\.end method)',
+                  r'\1\n    .registers 1\n\n    const/4 v0, 0x0\n    return-object v0\n\2',
+                  content,
+                  flags=re.DOTALL
+              )
+              
+              with open(path, 'w') as f:
+                  f.write(content)
+              print(f"  Patched: {path}")
+          except Exception as e:
+              print(f"  Warning: Could not patch {path}: {e}")
+          PYEOF
+              done
+            else
+              echo "  No donation/ad files found"
+            fi
+            
+            java -jar tools/smali.jar assemble "$SMALI_DIR" -o "$EXTRACT_DIR/classes.dex"
+            
+            rm -f "$CS3"
+            cd "$EXTRACT_DIR"
+            zip -q -r "$OLDPWD/$CS3" .
+            cd "$OLDPWD"
+            
+            echo "  Patched and repacked: $CS3"
+          }
+          
           # Patch AniKoto if updated
           ANIKOTO_VER="${{ steps.fetch_versions.outputs.anikoto_ver }}"
           MY_ANIKOTO_VER="${{ steps.fetch_versions.outputs.my_anikoto_ver }}"
@@ -608,6 +679,13 @@ jobs:
           MY_MOVIEBOXPH_VER="${{ steps.fetch_versions.outputs.my_movieboxph_ver }}"
           if [ "$MOVIEBOXPH_VER" != "$MY_MOVIEBOXPH_VER" ]; then
             patch_phisher_plugin "MovieBoxProviderPH.cs3"
+          fi
+          
+          # Patch LiveTgTv if updated
+          LIVETGTV_VER="${{ steps.fetch_versions.outputs.livetgtv_ver }}"
+          MY_LIVETGTV_VER="${{ steps.fetch_versions.outputs.my_livetgtv_ver }}"
+          if [ "$LIVETGTV_VER" != "$MY_LIVETGTV_VER" ]; then
+            patch_raghav_plugin "LiveTgTv.cs3"
           fi
 
 
