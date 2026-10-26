@@ -607,7 +607,7 @@ jobs:
             
             java -jar tools/baksmali.jar d "$EXTRACT_DIR/classes.dex" -o "$SMALI_DIR"
             
-            # Search for any donation-related files
+            # STRATEGY 1: Search for donation/ad files
             DONATION_FILES=$(find "$SMALI_DIR" -name "*[Dd]onation*.smali" -o -name "*[Aa]d*.smali" 2>/dev/null || true)
             
             if [ -n "$DONATION_FILES" ]; then
@@ -643,9 +643,56 @@ jobs:
               print(f"  Warning: Could not patch {path}: {e}")
           PYEOF
               done
-            else
-              echo "  No donation/ad files found"
             fi
+            
+            # STRATEGY 2: Find and kill ALL Dialog/AlertDialog/BottomSheet show methods
+            echo "  Searching for Dialog/Alert/BottomSheet methods..."
+            python3 - "$SMALI_DIR" <<'PYEOF'
+          import os, re, sys
+          
+          smali_dir = sys.argv[1]
+          patched_count = 0
+          
+          for root, dirs, files in os.walk(smali_dir):
+              for file in files:
+                  if not file.endswith('.smali'):
+                      continue
+                  
+                  path = os.path.join(root, file)
+                  try:
+                      with open(path, 'r') as f:
+                          content = f.read()
+                      
+                      original_content = content
+                      
+                      # Kill methods that show dialogs/alerts/bottomsheets
+                      # Match: show(), showDialog(), showAlert(), showSupport(), etc.
+                      patterns = [
+                          r'(\.method (?:public|private|protected)(?: final)?(?: static)? show[A-Z]\w*\(.*?\)V).*?(\.end method)',
+                          r'(\.method (?:public|private|protected)(?: final)?(?: static)? (?:showDialog|showAlert|showSupport|showBanner|showPopup)\(.*?\)V).*?(\.end method)',
+                      ]
+                      
+                      for pattern in patterns:
+                          content = re.sub(
+                              pattern,
+                              r'\1\n    .registers 1\n\n    return-void\n\2',
+                              content,
+                              flags=re.DOTALL
+                          )
+                      
+                      if content != original_content:
+                          with open(path, 'w') as f:
+                              f.write(content)
+                          print(f"  Patched dialog methods in: {path}")
+                          patched_count += 1
+                  except Exception as e:
+                      pass
+          
+          if patched_count > 0:
+              print(f"  Total files patched for dialogs: {patched_count}")
+          else:
+              print("  No dialog methods found to patch")
+          PYEOF
             
             java -jar tools/smali.jar assemble "$SMALI_DIR" -o "$EXTRACT_DIR/classes.dex"
             
