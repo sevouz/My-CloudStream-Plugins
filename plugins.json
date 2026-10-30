@@ -64,10 +64,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CNC%20Verse%20Mobile/logo.jpeg",
-        "fileHash": "sha256-690cf54b624050118d6093f4f6591eb2c324317579309fdb7c25612b38b321bb",
+        "fileHash": "sha256-c2518dff673074ded995f750d1b3c3e802fa49c58ad0d9c641f6ad0d107e9164",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 89112,
+        "fileSize": 89944,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -77,7 +77,7 @@
             "Movie",
             "TvSeries"
         ],
-        "version": 12,
+        "version": 13,
         "internalName": "CNC Verse Mobile",
         "description": "NetMirror Mobile API",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC Verse Mobile.cs3",
