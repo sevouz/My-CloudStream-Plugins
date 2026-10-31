@@ -262,5 +262,27 @@
         "internalName": "AniVortex",
         "fileSize": 138392,
         "name": "AniVortex"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniPm.cs3",
+        "status": 1,
+        "version": 1,
+        "name": "AniPm",
+        "internalName": "AniPm",
+        "authors": [
+            "Phisher98"
+        ],
+        "description": "AniPm - Watch Anime Online Free",
+        "fileSize": 107763,
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "language": "en",
+        "tvTypes": [
+            "Anime",
+            "AnimeMovie",
+            "OVA"
+        ],
+        "iconUrl": "https://a.favicon.im/ani.pm?larger=true",
+        "apiVersion": 1,
+        "fileHash": "sha256-469050c224f0445d3362cbe0ea68d86f1d4c65fac110ee5d9892df25dc79e19e"
     }
 ]
