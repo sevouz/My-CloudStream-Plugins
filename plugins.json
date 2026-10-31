@@ -266,7 +266,7 @@
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniPm.cs3",
         "status": 1,
-        "version": 1,
+        "version": 0,
         "name": "AniPm",
         "internalName": "AniPm",
         "authors": [
@@ -288,7 +288,7 @@
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MultiMoviesProvider.cs3",
         "status": 1,
-        "version": 55,
+        "version": 0,
         "name": "MultiMoviesProvider",
         "internalName": "MultiMoviesProvider",
         "authors": [
