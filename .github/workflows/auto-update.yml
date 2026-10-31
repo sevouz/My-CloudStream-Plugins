@@ -93,6 +93,7 @@ jobs:
           MOVIEBOXPH_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProvider") | .version' /tmp/phisher_plugins.json)
           ANIVORTEX_VER=$(jq -r '.[] | select(.internalName=="AniVortex") | .version' /tmp/phisher_plugins.json)
           ANIPM_VER=$(jq -r '.[] | select(.internalName=="AniPm") | .version' /tmp/phisher_plugins.json)
+          MULTIMOVIES_VER=$(jq -r '.[] | select(.internalName=="MultiMoviesProvider") | .version' /tmp/phisher_plugins.json)
           
           # Extract versions for CSX (Megix) plugins
           CINESTREAM_VER=$(jq -r '.[] | select(.internalName=="CineStream") | .version' /tmp/csx_plugins.json)
@@ -110,10 +111,11 @@ jobs:
           MY_MOVIEBOXPH_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProviderPH") | .version' plugins.json)
           MY_ANIVORTEX_VER=$(jq -r '.[] | select(.internalName=="AniVortex") | .version' plugins.json)
           MY_ANIPM_VER=$(jq -r '.[] | select(.internalName=="AniPm") | .version' plugins.json)
+          MY_MULTIMOVIES_VER=$(jq -r '.[] | select(.internalName=="MultiMoviesProvider") | .version' plugins.json)
           MY_CINESTREAM_VER=$(jq -r '.[] | select(.internalName=="CineStream") | .version' plugins.json)
           
-          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | AniKoto=$ANIKOTO_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER | Reanime=$REANIME_VER | MovieBoxPH=$MOVIEBOXPH_VER | AniVortex=$ANIVORTEX_VER | AniPm=$ANIPM_VER | CineStream=$CINESTREAM_VER"
-          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | AniKoto=$MY_ANIKOTO_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER | Reanime=$MY_REANIME_VER | MovieBoxPH=$MY_MOVIEBOXPH_VER | AniVortex=$MY_ANIVORTEX_VER | AniPm=$MY_ANIPM_VER | CineStream=$MY_CINESTREAM_VER"
+          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | AniKoto=$ANIKOTO_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER | Reanime=$REANIME_VER | MovieBoxPH=$MOVIEBOXPH_VER | AniVortex=$ANIVORTEX_VER | AniPm=$ANIPM_VER | MultiMovies=$MULTIMOVIES_VER | CineStream=$CINESTREAM_VER"
+          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | AniKoto=$MY_ANIKOTO_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER | Reanime=$MY_REANIME_VER | MovieBoxPH=$MY_MOVIEBOXPH_VER | AniVortex=$MY_ANIVORTEX_VER | AniPm=$MY_ANIPM_VER | MultiMovies=$MY_MULTIMOVIES_VER | CineStream=$MY_CINESTREAM_VER"
           
           # Determine which need updating
           NEEDS_UPDATE=false
@@ -129,6 +131,7 @@ jobs:
           [ "$MOVIEBOXPH_VER" != "$MY_MOVIEBOXPH_VER" ] && NEEDS_UPDATE=true && echo "MovieBoxPH needs update: $MY_MOVIEBOXPH_VER -> $MOVIEBOXPH_VER"
           [ "$ANIVORTEX_VER" != "$MY_ANIVORTEX_VER" ] && NEEDS_UPDATE=true && echo "AniVortex needs update: $MY_ANIVORTEX_VER -> $ANIVORTEX_VER"
           [ "$ANIPM_VER" != "$MY_ANIPM_VER" ] && NEEDS_UPDATE=true && echo "AniPm needs update: $MY_ANIPM_VER -> $ANIPM_VER"
+          [ "$MULTIMOVIES_VER" != "$MY_MULTIMOVIES_VER" ] && NEEDS_UPDATE=true && echo "MultiMovies needs update: $MY_MULTIMOVIES_VER -> $MULTIMOVIES_VER"
           [ "$CINESTREAM_VER" != "$MY_CINESTREAM_VER" ] && NEEDS_UPDATE=true && echo "CineStream needs update: $MY_CINESTREAM_VER -> $CINESTREAM_VER"          
           echo "needs_update=$NEEDS_UPDATE" >> $GITHUB_OUTPUT
           echo "castle_ver=$CASTLE_VER" >> $GITHUB_OUTPUT
@@ -143,6 +146,7 @@ jobs:
           echo "movieboxph_ver=$MOVIEBOXPH_VER" >> $GITHUB_OUTPUT
           echo "anivortex_ver=$ANIVORTEX_VER" >> $GITHUB_OUTPUT
           echo "anipm_ver=$ANIPM_VER" >> $GITHUB_OUTPUT
+          echo "multimovies_ver=$MULTIMOVIES_VER" >> $GITHUB_OUTPUT
           echo "cinestream_ver=$CINESTREAM_VER" >> $GITHUB_OUTPUT
           echo "my_castle_ver=$MY_CASTLE_VER" >> $GITHUB_OUTPUT
           echo "my_cncverse_ver=$MY_CNCVERSE_VER" >> $GITHUB_OUTPUT
@@ -156,6 +160,7 @@ jobs:
           echo "my_movieboxph_ver=$MY_MOVIEBOXPH_VER" >> $GITHUB_OUTPUT
           echo "my_anivortex_ver=$MY_ANIVORTEX_VER" >> $GITHUB_OUTPUT
           echo "my_anipm_ver=$MY_ANIPM_VER" >> $GITHUB_OUTPUT
+          echo "my_multimovies_ver=$MY_MULTIMOVIES_VER" >> $GITHUB_OUTPUT
           echo "my_cinestream_ver=$MY_CINESTREAM_VER" >> $GITHUB_OUTPUT
       - name: Download updated plugins from upstream
         if: steps.fetch_versions.outputs.needs_update == 'true'
@@ -256,6 +261,12 @@ jobs:
           MY_ANIPM_VER="${{ steps.fetch_versions.outputs.my_anipm_ver }}"
           if [ "$ANIPM_VER" != "$MY_ANIPM_VER" ]; then
             download_with_retry "$PHISHER_URL/AniPm.cs3" "AniPm.cs3"
+          fi
+          
+          MULTIMOVIES_VER="${{ steps.fetch_versions.outputs.multimovies_ver }}"
+          MY_MULTIMOVIES_VER="${{ steps.fetch_versions.outputs.my_multimovies_ver }}"
+          if [ "$MULTIMOVIES_VER" != "$MY_MULTIMOVIES_VER" ]; then
+            download_with_retry "$PHISHER_URL/MultiMoviesProvider.cs3" "MultiMoviesProvider.cs3"
           fi
           
           CINESTREAM_VER="${{ steps.fetch_versions.outputs.cinestream_ver }}"
@@ -745,6 +756,13 @@ jobs:
           if [ "$ANIPM_VER" != "$MY_ANIPM_VER" ]; then
             patch_phisher_plugin "AniPm.cs3"
           fi
+          
+          # Patch MultiMoviesProvider if updated
+          MULTIMOVIES_VER="${{ steps.fetch_versions.outputs.multimovies_ver }}"
+          MY_MULTIMOVIES_VER="${{ steps.fetch_versions.outputs.my_multimovies_ver }}"
+          if [ "$MULTIMOVIES_VER" != "$MY_MULTIMOVIES_VER" ]; then
+            patch_phisher_plugin "MultiMoviesProvider.cs3"
+          fi
 
       - name: Update plugins.json with new versions, sizes and hashes
         if: steps.fetch_versions.outputs.needs_update == 'true'
@@ -776,7 +794,7 @@ jobs:
           phisher_map = {p["internalName"]: p for p in phisher}
           csx_map = {p["internalName"]: p for p in csx}
           cnc_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN"]
-          phisher_plugins = ["AniKoto", "HiAnime", "StreamPlay", "Reanime", "MovieBoxProviderPH", "AniVortex", "AniPm"]
+          phisher_plugins = ["AniKoto", "HiAnime", "StreamPlay", "Reanime", "MovieBoxProviderPH", "AniVortex", "AniPm", "MultiMoviesProvider"]
           csx_plugins = ["CineStream"]
           for plugin in plugins:
               name = plugin["internalName"]
@@ -874,6 +892,10 @@ jobs:
           ANIPM_VER="${{ steps.fetch_versions.outputs.anipm_ver }}"
           MY_ANIPM_VER="${{ steps.fetch_versions.outputs.my_anipm_ver }}"
           [ "$ANIPM_VER" != "$MY_ANIPM_VER" ] && MSG+="- AniPm v$MY_ANIPM_VER → v$ANIPM_VER"$'\n'
+          
+          MULTIMOVIES_VER="${{ steps.fetch_versions.outputs.multimovies_ver }}"
+          MY_MULTIMOVIES_VER="${{ steps.fetch_versions.outputs.my_multimovies_ver }}"
+          [ "$MULTIMOVIES_VER" != "$MY_MULTIMOVIES_VER" ] && MSG+="- MultiMoviesProvider v$MY_MULTIMOVIES_VER → v$MULTIMOVIES_VER"$'\n'
           
           CINESTREAM_VER="${{ steps.fetch_versions.outputs.cinestream_ver }}"
           MY_CINESTREAM_VER="${{ steps.fetch_versions.outputs.my_cinestream_ver }}"
