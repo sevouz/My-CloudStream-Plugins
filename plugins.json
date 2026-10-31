@@ -246,7 +246,7 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniVortex.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "description": "AniVortex \u2014 Anime, movies & TV series streaming",
+        "description": "AniVortex — Anime, movies & TV series streaming",
         "tvTypes": [
             "Anime",
             "AnimeMovie",
@@ -284,5 +284,27 @@
         "iconUrl": "https://a.favicon.im/ani.pm?larger=true",
         "apiVersion": 1,
         "fileHash": "sha256-469050c224f0445d3362cbe0ea68d86f1d4c65fac110ee5d9892df25dc79e19e"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MultiMoviesProvider.cs3",
+        "status": 1,
+        "version": 55,
+        "name": "MultiMoviesProvider",
+        "internalName": "MultiMoviesProvider",
+        "authors": [
+            "Phisher98"
+        ],
+        "description": "Indian Multi-language HD Provider",
+        "fileSize": 143827,
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "language": "hi",
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "Anime"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/LikDev-256/likdev256-tamil-providers/master/MultiMoviesProvider/icon.png",
+        "apiVersion": 1,
+        "fileHash": "sha256-86a994d654cd738591399be533f998fa5a294e22dd91f710326c689742e8c93b"
     }
 ]
