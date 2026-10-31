@@ -150,16 +150,16 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "version": 693,
+        "version": 694,
         "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
-        "fileSize": 2071114,
+        "fileSize": 2105687,
         "language": "en",
         "authors": [
             "Phisher98",
             "Hexated"
         ],
         "description": "#1 best extention based on MultiAPI",
-        "fileHash": "sha256-51968978a2c9ea6d1c2114a66e14e8b5c1130eb4f4040db1ac6abdab77242d6e",
+        "fileHash": "sha256-6cd29a9a29e5d769e900e921aaa15f9166e0b7931c34622ba82a308093311acd",
         "internalName": "StreamPlay",
         "name": "StreamPlay",
         "tvTypes": [
