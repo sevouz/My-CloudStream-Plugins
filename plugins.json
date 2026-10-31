@@ -246,7 +246,7 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniVortex.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "description": "AniVortex — Anime, movies & TV series streaming",
+        "description": "AniVortex \u2014 Anime, movies & TV series streaming",
         "tvTypes": [
             "Anime",
             "AnimeMovie",
@@ -266,14 +266,14 @@
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniPm.cs3",
         "status": 1,
-        "version": 0,
+        "version": 1,
         "name": "AniPm",
         "internalName": "AniPm",
         "authors": [
             "Phisher98"
         ],
         "description": "AniPm - Watch Anime Online Free",
-        "fileSize": 107763,
+        "fileSize": 106149,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "language": "en",
         "tvTypes": [
@@ -283,19 +283,19 @@
         ],
         "iconUrl": "https://a.favicon.im/ani.pm?larger=true",
         "apiVersion": 1,
-        "fileHash": "sha256-469050c224f0445d3362cbe0ea68d86f1d4c65fac110ee5d9892df25dc79e19e"
+        "fileHash": "sha256-e24c8c0e607c77971657bc504888d80b3b94323cc883c9853b545be016162831"
     },
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MultiMoviesProvider.cs3",
         "status": 1,
-        "version": 0,
+        "version": 55,
         "name": "MultiMoviesProvider",
         "internalName": "MultiMoviesProvider",
         "authors": [
             "Phisher98"
         ],
         "description": "Indian Multi-language HD Provider",
-        "fileSize": 143827,
+        "fileSize": 142099,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "language": "hi",
         "tvTypes": [
@@ -305,6 +305,6 @@
         ],
         "iconUrl": "https://raw.githubusercontent.com/LikDev-256/likdev256-tamil-providers/master/MultiMoviesProvider/icon.png",
         "apiVersion": 1,
-        "fileHash": "sha256-86a994d654cd738591399be533f998fa5a294e22dd91f710326c689742e8c93b"
+        "fileHash": "sha256-09cd53d4a5ea896c43cd825c4f4c5cb9fedfa5d22e91ca8eb8bbf250809bd452"
     }
 ]
