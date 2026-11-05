@@ -22,10 +22,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CastleTvProvider/icon.png",
-        "fileHash": "sha256-2c2d82a4577dd90f9d22ced6d277fb02dfdefe063c978eae1f49038392eff53c",
+        "fileHash": "sha256-2feee2df1338ea9070f3c7e5bede6ebb9c7c89574cadfbc44fc8d0db9541f1d9",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 79180,
+        "fileSize": 76668,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -35,7 +35,7 @@
             "Movie",
             "TvSeries"
         ],
-        "version": 41,
+        "version": 44,
         "internalName": "CastleTvProvider",
         "description": "Castle TV Movies and Series Provider",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CastleTvProvider.cs3",
