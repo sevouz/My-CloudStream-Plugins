@@ -258,5 +258,29 @@
         "name": "LiveTgTv",
         "description": "INDIAN TV CHANNELS",
         "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniVortex.cs3",
+        "status": 1,
+        "version": 10,
+        "name": "AniVortex",
+        "internalName": "AniVortex",
+        "authors": [
+            "Phisher98"
+        ],
+        "description": "AniVortex — Anime, movies & TV series streaming",
+        "fileSize": 139072,
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "language": "hi",
+        "tvTypes": [
+            "Anime",
+            "AnimeMovie",
+            "OVA",
+            "TvSeries",
+            "Movie"
+        ],
+        "iconUrl": "https://anivortex.in/images/anivortex_logo_transparent.webp",
+        "apiVersion": 1,
+        "fileHash": "sha256-421b210ce0fe94bba531da5c0873e53ef37d45eada5bef88f88385eefa78ef14"
     }
 ]
