@@ -721,6 +721,12 @@ jobs:
             patch_phisher_plugin "AniKoto.cs3"
           fi
           
+          ANIPM_VER="${{ steps.fetch_versions.outputs.anipm_ver }}"
+          MY_ANIPM_VER="${{ steps.fetch_versions.outputs.my_anipm_ver }}"
+          if [ "$ANIPM_VER" != "$MY_ANIPM_VER" ]; then
+            patch_phisher_plugin "AniPm.cs3"
+          fi
+          
           # Patch HiAnime if updated
           HIANIME_VER="${{ steps.fetch_versions.outputs.hianime_ver }}"
           MY_HIANIME_VER="${{ steps.fetch_versions.outputs.my_hianime_ver }}"
