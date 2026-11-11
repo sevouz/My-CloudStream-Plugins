@@ -23,14 +23,14 @@
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniPm.cs3",
         "status": 1,
-        "version": 0,
+        "version": 1,
         "name": "AniPm",
         "internalName": "AniPm",
         "authors": [
             "Phisher98"
         ],
         "description": "AniPm - Watch Anime Online Free",
-        "fileSize": 108448,
+        "fileSize": 106785,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "language": "en",
         "tvTypes": [
@@ -40,7 +40,7 @@
         ],
         "iconUrl": "https://a.favicon.im/ani.pm?larger=true",
         "apiVersion": 1,
-        "fileHash": "sha256-819e4d806ed41c04e6b7ad5c37e944e860debb0dcb935563187c43e87bb1c08d"
+        "fileHash": "sha256-c7318926a2c743df193cbf2ae71619551fd4871baebe947cb6a23d4eb434da4d"
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/EasyPlayProvider/icon.png",
