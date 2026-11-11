@@ -326,27 +326,26 @@
     "iconUrl": "https://raw.githubusercontent.com/LikDev-256/likdev256-tamil-providers/master/MultiMoviesProvider/icon.png",
     "apiVersion": 1,
     "fileHash": "sha256-5b8dafa62d54e02367bb5612f74cb2aa46ac52836c8b277f08398c9ed2eacfcf"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/HDhub4u.cs3",
+    "status": 1,
+    "version": 0,
+    "name": "HDhub4u",
+    "internalName": "HDhub4u",
+    "authors": [
+      "Phisher98"
+    ],
+    "fileSize": 116066,
+    "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+    "language": "hi",
+    "tvTypes": [
+      "Movie",
+      "TvSeries",
+      "Anime"
+    ],
+    "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/HDHUB.png",
+    "apiVersion": 1,
+    "fileHash": "sha256-419c8ed8b74d23b84d59ca4c613dfdea08af584e9d30c91673da7269d962ff60"
   }
-,
-    {
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/HDhub4u.cs3",
-        "status": 1,
-        "version": 57,
-        "name": "HDhub4u",
-        "internalName": "HDhub4u",
-        "authors": [
-            "Phisher98"
-        ],
-        "fileSize": 116066,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "language": "hi",
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "Anime"
-        ],
-        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/HDHUB.png",
-        "apiVersion": 1,
-        "fileHash": "sha256-419c8ed8b74d23b84d59ca4c613dfdea08af584e9d30c91673da7269d962ff60"
-    }
 ]
