@@ -1,9 +1,11 @@
 # My CloudStream Plugins
 
+Aggregated Sites
+
 ## Installation URL
 
 ```
-https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC.json
+https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/plugins.json
 ```
 
 **How to Install:**
@@ -13,4 +15,4 @@ https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC.json
 4. Paste the URL above
 5. Click OK
 
-Your 8 plugins will be available to install!
+Your 13 plugins will be available to install!
