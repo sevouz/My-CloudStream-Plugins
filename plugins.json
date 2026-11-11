@@ -34,7 +34,7 @@
         "tvTypes": [
             "Live"
         ],
-        "version": 5,
+        "version": 4,
         "internalName": "EasyPlayProvider",
         "description": "EasyPlay IPTV Live TV channels (auto-leased Xtream playlist, no login)",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/EasyPlayProvider.cs3",
