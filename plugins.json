@@ -22,10 +22,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CastleTvProvider/icon.png",
-        "fileHash": "sha256-2c2d82a4577dd90f9d22ced6d277fb02dfdefe063c978eae1f49038392eff53c",
+        "fileHash": "sha256-0678af58532a3b08f25ba3d2b10c79364629f9ebb8a2e91b093a01d19e8e23af",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 79180,
+        "fileSize": 79045,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -35,7 +35,7 @@
             "Movie",
             "TvSeries"
         ],
-        "version": 41,
+        "version": 47,
         "internalName": "CastleTvProvider",
         "description": "Castle TV Movies and Series Provider",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CastleTvProvider.cs3",
@@ -64,10 +64,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CNC%20Verse%20Mobile/logo.jpeg",
-        "fileHash": "sha256-690cf54b624050118d6093f4f6591eb2c324317579309fdb7c25612b38b321bb",
+        "fileHash": "sha256-378ff6496ebdb6c404e3da2d550939f473dd3da9515972e3f1b9620dd31e98ca",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 89112,
+        "fileSize": 89941,
         "status": 1,
         "language": "ta",
         "authors": [
@@ -77,7 +77,7 @@
             "Movie",
             "TvSeries"
         ],
-        "version": 12,
+        "version": 13,
         "internalName": "CNC Verse Mobile",
         "description": "NetMirror Mobile API",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC Verse Mobile.cs3",
@@ -150,16 +150,16 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "version": 692,
+        "version": 695,
         "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
-        "fileSize": 2060473,
+        "fileSize": 2126242,
         "language": "en",
         "authors": [
             "Phisher98",
             "Hexated"
         ],
         "description": "#1 best extention based on MultiAPI",
-        "fileHash": "sha256-9c571fea26ca4a36bb06ddee204cb9d526c3ab98eb99cb7c6ddda55d960fd858",
+        "fileHash": "sha256-d0ebd6b0714946b0fa13bb1f124c265a4206daed5a1bd97e4379c2471ccb50f8",
         "internalName": "StreamPlay",
         "name": "StreamPlay",
         "tvTypes": [
@@ -182,12 +182,12 @@
         "internalName": "Reanime",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Reanime.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 111956,
+        "fileSize": 103925,
         "authors": [
             "Phisher98"
         ],
-        "version": 2,
-        "fileHash": "sha256-c558e66049552c919b21b5cb8ecf9d1387d6616e119f9e220837806e5b5ce479",
+        "version": 3,
+        "fileHash": "sha256-9992b023b95fab54373c29216dfd092819e2efa352d1b78c3271de3b6d45a9dd",
         "status": 1,
         "language": "en",
         "name": "Reanime",
@@ -203,12 +203,12 @@
         "internalName": "MovieBoxProviderPH",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProviderPH.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 149675,
+        "fileSize": 159748,
         "authors": [
             "Phisher98"
         ],
-        "version": 38,
-        "fileHash": "sha256-d43d715b8ea0102be8430495581f57967bfcf8191e3c5e01660f9142bed4d2bd",
+        "version": 40,
+        "fileHash": "sha256-ec97bdbe381affda3a7ce6a44ec58678f1fc186807b9f7f9a1b3dfc65ccd7e40",
         "status": 1,
         "language": "en",
         "name": "MovieBoxPH",
