@@ -21,6 +21,26 @@
         "name": "AniKoto"
     },
     {
+        "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/EasyPlayProvider/icon.png",
+        "fileHash": "sha256-886dcad925ce2274075ef642b8ac178b7b684fb42c17b874f7711d0c6b9d91ea",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "fileSize": 62569,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "NivinCNC"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 5,
+        "internalName": "EasyPlayProvider",
+        "description": "EasyPlay IPTV Live TV channels (auto-leased Xtream playlist, no login)",
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/EasyPlayProvider.cs3",
+        "name": "EasyPlayProvider"
+    },
+    {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CastleTvProvider/icon.png",
         "fileHash": "sha256-0678af58532a3b08f25ba3d2b10c79364629f9ebb8a2e91b093a01d19e8e23af",
         "apiVersion": 1,
