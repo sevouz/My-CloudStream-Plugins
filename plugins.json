@@ -305,4 +305,27 @@
         "apiVersion": 1,
         "fileHash": "sha256-421b210ce0fe94bba531da5c0873e53ef37d45eada5bef88f88385eefa78ef14"
     }
+,
+    {
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MultiMoviesProvider.cs3",
+        "status": 1,
+        "version": 55,
+        "name": "MultiMoviesProvider",
+        "internalName": "MultiMoviesProvider",
+        "authors": [
+            "Phisher98"
+        ],
+        "description": "Indian Multi-language HD Provider",
+        "fileSize": 144483,
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "language": "hi",
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "Anime"
+        ],
+        "iconUrl": "https://multimovies.cloud/favicon.ico",
+        "apiVersion": 1,
+        "fileHash": "sha256-07c7938109842536bc84b7e4b59675200034f713b34b476a11c9985878fbcdcc"
+    }
 ]
