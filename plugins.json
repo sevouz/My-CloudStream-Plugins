@@ -192,16 +192,16 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "version": 701,
+        "version": 709,
         "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
-        "fileSize": 2133572,
+        "fileSize": 2180070,
         "language": "en",
         "authors": [
             "Phisher98",
             "Hexated"
         ],
         "description": "#1 best extention based on MultiAPI",
-        "fileHash": "sha256-7b94226307fe9368f1b8c0f8ac25ae28c926abc10234d3cd3d0c36d1ea75d054",
+        "fileHash": "sha256-a0e9ce288a23923616509475b5cbd2a5b4fe4b94461ef4c6e767fd166999aac8",
         "internalName": "StreamPlay",
         "name": "StreamPlay",
         "tvTypes": [
@@ -245,12 +245,12 @@
         "internalName": "MovieBoxProviderPH",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProviderPH.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 159748,
+        "fileSize": 219178,
         "authors": [
             "Phisher98"
         ],
-        "version": 40,
-        "fileHash": "sha256-ec97bdbe381affda3a7ce6a44ec58678f1fc186807b9f7f9a1b3dfc65ccd7e40",
+        "version": 41,
+        "fileHash": "sha256-c78ae8839119f198f91e974c2ba5fd7f584c7dbe12d2fd39d5a8c877e6ef9f65",
         "status": 1,
         "language": "en",
         "name": "MovieBoxPH",
@@ -284,14 +284,14 @@
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniVortex.cs3",
         "status": 1,
-        "version": 10,
+        "version": 15,
         "name": "AniVortex",
         "internalName": "AniVortex",
         "authors": [
             "Phisher98"
         ],
         "description": "AniVortex \u2014 Anime, movies & TV series streaming",
-        "fileSize": 139072,
+        "fileSize": 202461,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "language": "hi",
         "tvTypes": [
@@ -303,7 +303,7 @@
         ],
         "iconUrl": "https://anivortex.in/images/anivortex_logo_transparent.webp",
         "apiVersion": 1,
-        "fileHash": "sha256-421b210ce0fe94bba531da5c0873e53ef37d45eada5bef88f88385eefa78ef14"
+        "fileHash": "sha256-6deea8d6984768b95cee7952d0de7c74e1d802d9f59490298c8d89b6477dd41e"
     },
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MultiMoviesProvider.cs3",
