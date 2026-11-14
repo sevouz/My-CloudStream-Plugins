@@ -687,28 +687,33 @@ jobs:
                   path = os.path.join(root, file)
                   try:
                       with open(path, 'r', encoding='utf-8', errors='ignore') as f:
-                          content = f.read()
+                          lines = f.readlines()
                       
-                      original_content = content
+                      original_lines = lines[:]
+                      filtered_lines = []
                       
-                      # Remove ALL invoke-* calls to com/raghav/donation/*
-                      pattern = r'^\s*invoke-[a-z/]+\s+\{[^}]*\},\s*Lcom/raghav/donation/[^;]*;->[^\n]+\n'
-                      matches = re.findall(pattern, content, re.MULTILINE)
-                      if matches:
-                          removed_calls += len(matches)
-                          content = re.sub(pattern, '', content, flags=re.MULTILINE)
+                      i = 0
+                      while i < len(lines):
+                          line = lines[i]
+                          
+                          # Check if this line is an invoke to com/raghav/donation
+                          if 'invoke-' in line and 'Lcom/raghav/donation/' in line:
+                              removed_calls += 1
+                              # Skip this line entirely
+                              i += 1
+                              continue
+                          
+                          # Also remove field declarations
+                          if '.field' in line and 'Lcom/raghav/donation/' in line:
+                              i += 1
+                              continue
+                          
+                          filtered_lines.append(line)
+                          i += 1
                       
-                      # Remove field references to com/raghav/donation
-                      content = re.sub(
-                          r'^\s*\.field\s+.*?\s+Lcom/raghav/donation/[^;]*;\s*$',
-                          '',
-                          content,
-                          flags=re.MULTILINE
-                      )
-                      
-                      if content != original_content:
+                      if filtered_lines != original_lines:
                           with open(path, 'w', encoding='utf-8') as f:
-                              f.write(content)
+                              f.writelines(filtered_lines)
                           patched_count += 1
                   except Exception as e:
                       pass
