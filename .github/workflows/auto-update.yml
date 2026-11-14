@@ -635,10 +635,10 @@ jobs:
             echo "  Patched and repacked: $CS3"
           }
           
-          # ── Patch raghav plugins (NUCLEAR donation/ad removal) ────────────
+          # ── Patch raghav plugins (ULTIMATE donation removal) ────────────
           patch_raghav_plugin() {
             local CS3="$1"
-            echo "--- Patching raghav plugin (NUCLEAR): $CS3 ---"
+            echo "--- Patching raghav plugin (ULTIMATE): $CS3 ---"
             
             local WORK_DIR="/tmp/patch_raghav_$(basename "$CS3" .cs3)"
             local SMALI_DIR="$WORK_DIR/smali"
@@ -656,70 +656,28 @@ jobs:
             
             java -jar tools/baksmali.jar d "$EXTRACT_DIR/classes.dex" -o "$SMALI_DIR"
             
-            echo "  ═══ NUCLEAR OPTION: Killing ALL donation/webview/URL code ═══"
+            echo "  ═══ ULTIMATE: Complete com/raghav/donation package elimination ═══"
             
-            # STEP 1: Find and COMPLETELY DELETE all donation-related files
-            DONATION_FILES=$(find "$SMALI_DIR" -type f \( -iname "*donation*" -o -iname "*sponsor*" -o -iname "*support*" \) -name "*.smali" 2>/dev/null || true)
+            # STEP 1: DELETE entire com/raghav/donation directory
+            DONATION_DIR=$(find "$SMALI_DIR" -type d -path "*/com/raghav/donation" 2>/dev/null | head -n 1)
             
-            if [ -n "$DONATION_FILES" ]; then
-              echo "  Found $(echo "$DONATION_FILES" | wc -l) donation-related files..."
-              for FILE in $DONATION_FILES; do
-                echo "  🗑️  DELETING: $(basename $FILE)"
-                rm -f "$FILE"
-              done
+            if [ -n "$DONATION_DIR" ] && [ -d "$DONATION_DIR" ]; then
+              NUM_FILES=$(find "$DONATION_DIR" -type f 2>/dev/null | wc -l || echo "0")
+              echo "  🗑️  DELETING DIRECTORY: $DONATION_DIR ($NUM_FILES files)"
+              rm -rf "$DONATION_DIR"
+              echo "  ✅ Deleted com/raghav/donation directory completely"
+            else
+              echo "  ℹ️  No com/raghav/donation directory found"
             fi
             
-            # STEP 2: Kill ALL methods in Plugin class that might trigger donation
-            echo "  Neutralizing Plugin initialization..."
-            python3 - "$SMALI_DIR" <<'PYEOF'
-          import os, re, sys
-          
-          smali_dir = sys.argv[1]
-          
-          # Find the Plugin class
-          for root, dirs, files in os.walk(smali_dir):
-              for file in files:
-                  if 'Plugin.smali' not in file:
-                      continue
-                  
-                  path = os.path.join(root, file)
-                  try:
-                      with open(path, 'r') as f:
-                          content = f.read()
-                      
-                      original_content = content
-                      
-                      # Kill the load() method if it exists
-                      content = re.sub(
-                          r'(\.method public load\(\)V)(.*?)(\.end method)',
-                          r'\1\n    .registers 1\n\n    return-void\n\3',
-                          content,
-                          flags=re.DOTALL
-                      )
-                      
-                      # Remove any URL constants (GitHub sponsorship pages)
-                      content = re.sub(
-                          r'const-string [vp]\d+, "https?://[^"]*(?:github|sponsor|donate|donation)[^"]*"',
-                          'const-string v0, ""',
-                          content,
-                          flags=re.IGNORECASE
-                      )
-                      
-                      if content != original_content:
-                          with open(path, 'w') as f:
-                              f.write(content)
-                          print(f"  ✅ Neutralized Plugin: {file}")
-                  except Exception as e:
-                      pass
-          PYEOF
-            
-            # STEP 3: Scan ALL smali files and remove donation/sponsor URLs and calls
-            echo "  Scanning ALL files for donation triggers..."
+            # STEP 2: Remove ALL calls to com/raghav/donation/* from ALL smali files
+            echo "  Removing ALL donation invocations..."
             python3 - "$SMALI_DIR" <<'PYEOF'
           import os, re, sys
           
           smali_dir = sys.argv[1]
           patched_count = 0
+          removed_calls = 0
           
           for root, dirs, files in os.walk(smali_dir):
               for file in files:
@@ -728,52 +686,36 @@ jobs:
                   
                   path = os.path.join(root, file)
                   try:
-                      with open(path, 'r') as f:
+                      with open(path, 'r', encoding='utf-8', errors='ignore') as f:
                           content = f.read()
                       
                       original_content = content
                       
-                      # Remove ALL donation/sponsor URLs
-                      content = re.sub(
-                          r'const-string [vp]\d+, "https?://[^"]*(?:github|sponsor|donate|donation|support|patreon|ko-fi|buymeacoffee)[^"]*"',
-                          'const-string v0, ""',
-                          content,
-                          flags=re.IGNORECASE
-                      )
+                      # Remove ALL invoke-* calls to com/raghav/donation/*
+                      pattern = r'^\s*invoke-[a-z/]+\s+\{[^}]*\},\s*Lcom/raghav/donation/[^;]*;->[^\n]+\n'
+                      matches = re.findall(pattern, content, re.MULTILINE)
+                      if matches:
+                          removed_calls += len(matches)
+                          content = re.sub(pattern, '', content, flags=re.MULTILINE)
                       
-                      # Remove any method calls to donation classes
+                      # Remove field references to com/raghav/donation
                       content = re.sub(
-                          r'invoke-[a-z/]+\s+\{[^}]*\},\s*L[^;]*(?:donation|sponsor|support)[^;]*;->[^\n]+\n',
-                          '# REMOVED: donation call\n',
+                          r'^\s*\.field\s+.*?\s+Lcom/raghav/donation/[^;]*;\s*$',
+                          '',
                           content,
-                          flags=re.IGNORECASE
-                      )
-                      
-                      # Remove donation field references
-                      content = re.sub(
-                          r'\.field .*?L[^;]*(?:donation|sponsor|support)[^;]*;',
-                          '# REMOVED: donation field',
-                          content,
-                          flags=re.IGNORECASE
-                      )
-                      
-                      # Remove WebView.loadUrl calls with donation URLs
-                      content = re.sub(
-                          r'invoke-virtual \{[^}]+\}, Landroid/webkit/WebView;->loadUrl\(Ljava/lang/String;\)V[^\n]*\n(?=.*(?:github|sponsor|donate))',
-                          '# REMOVED: WebView donation load\n',
-                          content,
-                          flags=re.IGNORECASE
+                          flags=re.MULTILINE
                       )
                       
                       if content != original_content:
-                          with open(path, 'w') as f:
+                          with open(path, 'w', encoding='utf-8') as f:
                               f.write(content)
                           patched_count += 1
                   except Exception as e:
                       pass
           
-          print(f"  ✅ Total files scanned and patched: {patched_count}")
+          print(f"  ✅ Patched {patched_count} files, removed {removed_calls} donation calls")
           PYEOF
+            
             
             java -jar tools/smali.jar assemble "$SMALI_DIR" -o "$EXTRACT_DIR/classes.dex"
             
@@ -782,7 +724,7 @@ jobs:
             zip -q -r "$OLDPWD/$CS3" .
             cd "$OLDPWD"
             
-            echo "  ☢️  NUCLEAR patching complete: $CS3"
+            echo "  ✅ ULTIMATE patching complete: $CS3"
           }
           
           # Patch AniKoto if updated
