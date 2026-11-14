@@ -348,4 +348,26 @@
         "apiVersion": 1,
         "fileHash": "sha256-867f96850fb6275380a39d7678c0368ce186ffe58b1f4fc285412edd950a889d"
     }
+,
+    {
+        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Play4u.cs3",
+        "status": 1,
+        "version": 1,
+        "name": "Play4u",
+        "internalName": "Play4u",
+        "authors": [
+            "KSHITIJ8473"
+        ],
+        "description": "Play4u - Movies and series with multi-language audio and quality options",
+        "fileSize": 63653,
+        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+        "language": "en",
+        "tvTypes": [
+            "Movie",
+            "TvSeries"
+        ],
+        "iconUrl": "https://www.google.com/s2/favicons?domain=play4u.org&sz=64",
+        "apiVersion": 1,
+        "fileHash": "sha256-c0215d46d978f75fd1dcfb8c383524ae7ad4b534456b55005ba10ad85f6449d1"
+    }
 ]
