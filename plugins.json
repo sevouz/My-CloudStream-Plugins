@@ -351,7 +351,7 @@
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Play4u.cs3",
         "status": 1,
-        "version": 0,
+        "version": 1,
         "name": "Play4u",
         "internalName": "Play4u",
         "authors": [
@@ -367,6 +367,6 @@
         ],
         "iconUrl": "https://www.google.com/s2/favicons?domain=play4u.org&sz=64",
         "apiVersion": 1,
-        "fileHash": "sha256-9a030eaf8a1584c8e84cc89153ecf14c6931d91152296278de886640f0bb946f"
+        "fileHash": "sha256-ee08a359f58a92dd6ece1eb1530ce32fef9a0ce57da09a4aff593a08109938a9"
     }
 ]
