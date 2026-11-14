@@ -635,10 +635,10 @@ jobs:
             echo "  Patched and repacked: $CS3"
           }
           
-          # ── Patch raghav plugins (AGGRESSIVE donation/ad removal) ────────────
+          # ── Patch raghav plugins (NUCLEAR donation/ad removal) ────────────
           patch_raghav_plugin() {
             local CS3="$1"
-            echo "--- Patching raghav plugin (AGGRESSIVE): $CS3 ---"
+            echo "--- Patching raghav plugin (NUCLEAR): $CS3 ---"
             
             local WORK_DIR="/tmp/patch_raghav_$(basename "$CS3" .cs3)"
             local SMALI_DIR="$WORK_DIR/smali"
@@ -656,79 +656,30 @@ jobs:
             
             java -jar tools/baksmali.jar d "$EXTRACT_DIR/classes.dex" -o "$SMALI_DIR"
             
-            # AGGRESSIVE STRATEGY: Completely kill ALL donation-related code
-            echo "  Killing ALL donation/ad code..."
+            echo "  ═══ NUCLEAR OPTION: Killing ALL donation/webview/URL code ═══"
             
-            # Find ALL donation-related files (case insensitive, broad match)
-            DONATION_FILES=$(find "$SMALI_DIR" -type f -iname "*donation*.smali" 2>/dev/null || true)
+            # STEP 1: Find and COMPLETELY DELETE all donation-related files
+            DONATION_FILES=$(find "$SMALI_DIR" -type f \( -iname "*donation*" -o -iname "*sponsor*" -o -iname "*support*" \) -name "*.smali" 2>/dev/null || true)
             
             if [ -n "$DONATION_FILES" ]; then
-              echo "  Found $(echo "$DONATION_FILES" | wc -l) donation files to neutralize..."
+              echo "  Found $(echo "$DONATION_FILES" | wc -l) donation-related files..."
               for FILE in $DONATION_FILES; do
-                python3 - "$FILE" <<'PYEOF'
-          import re, sys
-          path = sys.argv[1]
-          try:
-              with open(path, 'r') as f:
-                  content = f.read()
-              
-              original_content = content
-              
-              # Kill ALL void methods completely
-              content = re.sub(
-                  r'(\.method (?:public|private|protected|static|final| )+.*?\)V)(.*?)(\.end method)',
-                  r'\1\n    .registers 1\n\n    return-void\n\3',
-                  content,
-                  flags=re.DOTALL
-              )
-              
-              # Kill ALL methods returning objects (View, Dialog, Fragment, etc.)
-              content = re.sub(
-                  r'(\.method (?:public|private|protected|static|final| )+.*?\)L[^;]+;)(.*?)(\.end method)',
-                  r'\1\n    .registers 1\n\n    const/4 v0, 0x0\n    return-object v0\n\3',
-                  content,
-                  flags=re.DOTALL
-              )
-              
-              # Kill ALL boolean methods (return false)
-              content = re.sub(
-                  r'(\.method (?:public|private|protected|static|final| )+.*?\)Z)(.*?)(\.end method)',
-                  r'\1\n    .registers 1\n\n    const/4 v0, 0x0\n    return v0\n\3',
-                  content,
-                  flags=re.DOTALL
-              )
-              
-              # Kill constructors (make them empty)
-              content = re.sub(
-                  r'(\.method (?:public|private|protected) constructor <init>\(.*?\)V)(.*?)(\.end method)',
-                  r'\1\n    .registers 1\n\n    return-void\n\3',
-                  content,
-                  flags=re.DOTALL
-              )
-              
-              if content != original_content:
-                  with open(path, 'w') as f:
-                      f.write(content)
-                  print(f"  ✅ Killed: {path}")
-              
-          except Exception as e:
-              print(f"  ⚠ Could not patch {path}: {e}")
-          PYEOF
+                echo "  🗑️  DELETING: $(basename $FILE)"
+                rm -f "$FILE"
               done
             fi
             
-            # STRATEGY 2: Kill provider methods that might call donation
-            echo "  Neutralizing provider donation triggers..."
+            # STEP 2: Kill ALL methods in Plugin class that might trigger donation
+            echo "  Neutralizing Plugin initialization..."
             python3 - "$SMALI_DIR" <<'PYEOF'
           import os, re, sys
           
           smali_dir = sys.argv[1]
-          patched_count = 0
           
-          # Find the main provider file
+          # Find the Plugin class
           for root, dirs, files in os.walk(smali_dir):
               for file in files:
-                  if not file.endswith('Provider.smali'):
+                  if 'Plugin.smali' not in file:
                       continue
                   
                   path = os.path.join(root, file)
@@ -738,30 +689,90 @@ jobs:
                       
                       original_content = content
                       
-                      # Remove any calls to DonationManager
-                      # Pattern: invoke-* {.*}, L.*/donation/DonationManager;->.*
+                      # Kill the load() method if it exists
                       content = re.sub(
-                          r'invoke-[a-z/]+\s+\{[^}]*\},\s*L[^;]*/donation/DonationManager;->[^\n]+\n',
-                          '# REMOVED: donation call\n',
-                          content
+                          r'(\.method public load\(\)V)(.*?)(\.end method)',
+                          r'\1\n    .registers 1\n\n    return-void\n\3',
+                          content,
+                          flags=re.DOTALL
                       )
                       
-                      # Remove any DonationManager field references
+                      # Remove any URL constants (GitHub sponsorship pages)
                       content = re.sub(
-                          r'\.field .*?L[^;]*/donation/DonationManager;',
-                          '# REMOVED: donation field',
-                          content
+                          r'const-string [vp]\d+, "https?://[^"]*(?:github|sponsor|donate|donation)[^"]*"',
+                          'const-string v0, ""',
+                          content,
+                          flags=re.IGNORECASE
                       )
                       
                       if content != original_content:
                           with open(path, 'w') as f:
                               f.write(content)
-                          print(f"  ✅ Removed donation triggers from: {path}")
+                          print(f"  ✅ Neutralized Plugin: {file}")
+                  except Exception as e:
+                      pass
+          PYEOF
+            
+            # STEP 3: Scan ALL smali files and remove donation/sponsor URLs and calls
+            echo "  Scanning ALL files for donation triggers..."
+            python3 - "$SMALI_DIR" <<'PYEOF'
+          import os, re, sys
+          
+          smali_dir = sys.argv[1]
+          patched_count = 0
+          
+          for root, dirs, files in os.walk(smali_dir):
+              for file in files:
+                  if not file.endswith('.smali'):
+                      continue
+                  
+                  path = os.path.join(root, file)
+                  try:
+                      with open(path, 'r') as f:
+                          content = f.read()
+                      
+                      original_content = content
+                      
+                      # Remove ALL donation/sponsor URLs
+                      content = re.sub(
+                          r'const-string [vp]\d+, "https?://[^"]*(?:github|sponsor|donate|donation|support|patreon|ko-fi|buymeacoffee)[^"]*"',
+                          'const-string v0, ""',
+                          content,
+                          flags=re.IGNORECASE
+                      )
+                      
+                      # Remove any method calls to donation classes
+                      content = re.sub(
+                          r'invoke-[a-z/]+\s+\{[^}]*\},\s*L[^;]*(?:donation|sponsor|support)[^;]*;->[^\n]+\n',
+                          '# REMOVED: donation call\n',
+                          content,
+                          flags=re.IGNORECASE
+                      )
+                      
+                      # Remove donation field references
+                      content = re.sub(
+                          r'\.field .*?L[^;]*(?:donation|sponsor|support)[^;]*;',
+                          '# REMOVED: donation field',
+                          content,
+                          flags=re.IGNORECASE
+                      )
+                      
+                      # Remove WebView.loadUrl calls with donation URLs
+                      content = re.sub(
+                          r'invoke-virtual \{[^}]+\}, Landroid/webkit/WebView;->loadUrl\(Ljava/lang/String;\)V[^\n]*\n(?=.*(?:github|sponsor|donate))',
+                          '# REMOVED: WebView donation load\n',
+                          content,
+                          flags=re.IGNORECASE
+                      )
+                      
+                      if content != original_content:
+                          with open(path, 'w') as f:
+                              f.write(content)
                           patched_count += 1
                   except Exception as e:
                       pass
           
-          print(f"  Total provider files patched: {patched_count}")
+          print(f"  ✅ Total files scanned and patched: {patched_count}")
           PYEOF
             
             java -jar tools/smali.jar assemble "$SMALI_DIR" -o "$EXTRACT_DIR/classes.dex"
@@ -771,7 +782,7 @@ jobs:
             zip -q -r "$OLDPWD/$CS3" .
             cd "$OLDPWD"
             
-            echo "  ✅ Aggressively patched and repacked: $CS3"
+            echo "  ☢️  NUCLEAR patching complete: $CS3"
           }
           
           # Patch AniKoto if updated
