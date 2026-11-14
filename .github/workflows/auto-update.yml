@@ -847,10 +847,15 @@ jobs:
           with open(csx_file) as f:
               csx = json.load(f)
           
+          raghav_file = "/tmp/raghav_plugins.json"
+          with open(raghav_file) as f:
+              raghav = json.load(f)
+          
           # Build upstream version lookup
           upstream_map = {p["internalName"]: p for p in upstream}
           phisher_map = {p["internalName"]: p for p in phisher}
           csx_map = {p["internalName"]: p for p in csx}
+          raghav_map = {p["internalName"]: p for p in raghav}
           cnc_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN", "EasyPlayProvider"]
           phisher_plugins = ["AniKoto", "AniPm", "HiAnime", "StreamPlay", "Reanime", "MovieBoxProviderPH", "AniVortex", "MultiMoviesProvider", "HDhub4u"]
           raghav_plugins = ["Play4u"]
@@ -881,6 +886,8 @@ jobs:
                       plugin["version"] = phisher_map[upstream_name]["version"]
               elif name in csx_plugins and name in csx_map:
                   plugin["version"] = csx_map[name]["version"]
+              elif name in raghav_plugins and name in raghav_map:
+                  plugin["version"] = raghav_map[name]["version"]
               plugin["fileHash"] = f"sha256-{sha256}"
               plugin["fileSize"] = size
               
