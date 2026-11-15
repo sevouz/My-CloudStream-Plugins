@@ -1,10 +1,10 @@
 [
     {
         "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
-        "fileHash": "sha256-5d0982387fb98cf5bd96db65584fabd998ac0e945dbf01130818f496cb275a4a",
+        "fileHash": "sha256-4e2e76ef42f298297979d93a9a30064c413256ca350af3cfc8d76310c2b00319",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 79731,
+        "fileSize": 81340,
         "status": 1,
         "language": "en",
         "authors": [
@@ -14,7 +14,7 @@
             "Anime",
             "AnimeMovie"
         ],
-        "version": 6,
+        "version": 7,
         "internalName": "AniKoto",
         "description": "AniKoto - Anime streaming",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniKoto.cs3",
