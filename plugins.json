@@ -44,10 +44,10 @@
     },
     {
         "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/EasyPlayProvider/icon.png",
-        "fileHash": "sha256-b622714ed689e31c9452522e29811de05e4f56284fc3120377cff332f085f886",
+        "fileHash": "sha256-f78c17a987d8ddcb36e5711bde0d7416a9aa8e285ca9995c59cd498fab40eaaf",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 62579,
+        "fileSize": 52370,
         "status": 1,
         "language": "en",
         "authors": [
@@ -56,7 +56,7 @@
         "tvTypes": [
             "Live"
         ],
-        "version": 9,
+        "version": 10,
         "internalName": "EasyPlayProvider",
         "description": "EasyPlay IPTV Live TV channels (auto-leased Xtream playlist, no login)",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/EasyPlayProvider.cs3",
