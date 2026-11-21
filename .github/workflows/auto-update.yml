@@ -88,6 +88,7 @@ jobs:
           MOVIEBOX_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProvider") | .version' /tmp/upstream_plugins.json)
           MOVIEBOXIN_VER=$(jq -r '.[] | select(.internalName=="MovieBoxProviderIN") | .version' /tmp/upstream_plugins.json)
           EASYPLAY_VER=$(jq -r '.[] | select(.internalName=="EasyPlayProvider") | .version' /tmp/upstream_plugins.json)
+          CLOWNIPTV_VER=$(jq -r '.[] | select(.internalName=="ClownIPTVProvider") | .version' /tmp/upstream_plugins.json)
           
           # Extract versions for phisher98 plugins
           ANIKOTO_VER=$(jq -r '.[] | select(.internalName=="AniKoto") | .version' /tmp/phisher_plugins.json)
@@ -128,9 +129,10 @@ jobs:
           MY_MOVY_VER=$(jq -r '.[] | select(.internalName=="Movy") | .version' plugins.json)
           MY_ANV_VER=$(jq -r '.[] | select(.internalName=="Anv") | .version' plugins.json)
           MY_EASYPLAY_VER=$(jq -r '.[] | select(.internalName=="EasyPlayProvider") | .version' plugins.json)
+          MY_CLOWNIPTV_VER=$(jq -r '.[] | select(.internalName=="ClownIPTVProvider") | .version' plugins.json)
           
-          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | EasyPlay=$EASYPLAY_VER | AniKoto=$ANIKOTO_VER | AniPm=$ANIPM_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER | Reanime=$REANIME_VER | MovieBoxPH=$MOVIEBOXPH_VER | AniVortex=$ANIVORTEX_VER | MultiMovies=$MULTIMOVIES_VER | HDhub4u=$HDHUB4U_VER | CineStream=$CINESTREAM_VER | Play4u=$PLAY4U_VER | Movy=$MOVY_VER | Anv=$ANV_VER"
-          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | EasyPlay=$MY_EASYPLAY_VER | AniKoto=$MY_ANIKOTO_VER | AniPm=$MY_ANIPM_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER | Reanime=$MY_REANIME_VER | MovieBoxPH=$MY_MOVIEBOXPH_VER | AniVortex=$MY_ANIVORTEX_VER | MultiMovies=$MY_MULTIMOVIES_VER | HDhub4u=$MY_HDHUB4U_VER | CineStream=$MY_CINESTREAM_VER | Play4u=$MY_PLAY4U_VER | Movy=$MY_MOVY_VER | Anv=$MY_ANV_VER"
+          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | EasyPlay=$EASYPLAY_VER | ClownIPTV=$CLOWNIPTV_VER | AniKoto=$ANIKOTO_VER | AniPm=$ANIPM_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER | Reanime=$REANIME_VER | MovieBoxPH=$MOVIEBOXPH_VER | AniVortex=$ANIVORTEX_VER | MultiMovies=$MULTIMOVIES_VER | HDhub4u=$HDHUB4U_VER | CineStream=$CINESTREAM_VER | Play4u=$PLAY4U_VER | Movy=$MOVY_VER | Anv=$ANV_VER"
+          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | EasyPlay=$MY_EASYPLAY_VER | ClownIPTV=$MY_CLOWNIPTV_VER | AniKoto=$MY_ANIKOTO_VER | AniPm=$MY_ANIPM_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER | Reanime=$MY_REANIME_VER | MovieBoxPH=$MY_MOVIEBOXPH_VER | AniVortex=$MY_ANIVORTEX_VER | MultiMovies=$MY_MULTIMOVIES_VER | HDhub4u=$MY_HDHUB4U_VER | CineStream=$MY_CINESTREAM_VER | Play4u=$MY_PLAY4U_VER | Movy=$MY_MOVY_VER | Anv=$MY_ANV_VER"
           
           # Determine which need updating
           NEEDS_UPDATE=false
@@ -140,6 +142,7 @@ jobs:
           [ "$MOVIEBOX_VER" != "$MY_MOVIEBOX_VER" ] && NEEDS_UPDATE=true && echo "MovieBoxProvider needs update: $MY_MOVIEBOX_VER -> $MOVIEBOX_VER"
           [ "$MOVIEBOXIN_VER" != "$MY_MOVIEBOXIN_VER" ] && NEEDS_UPDATE=true && echo "MovieBoxProviderIN needs update: $MY_MOVIEBOXIN_VER -> $MOVIEBOXIN_VER"
           [ "$EASYPLAY_VER" != "$MY_EASYPLAY_VER" ] && NEEDS_UPDATE=true && echo "EasyPlay needs update: $MY_EASYPLAY_VER -> $EASYPLAY_VER"
+          [ "$CLOWNIPTV_VER" != "$MY_CLOWNIPTV_VER" ] && NEEDS_UPDATE=true && echo "ClownIPTVProvider needs update: $MY_CLOWNIPTV_VER -> $CLOWNIPTV_VER"
           [ "$ANIKOTO_VER" != "$MY_ANIKOTO_VER" ] && NEEDS_UPDATE=true && echo "AniKoto needs update: $MY_ANIKOTO_VER -> $ANIKOTO_VER"
           [ "$ANIPM_VER" != "$MY_ANIPM_VER" ] && NEEDS_UPDATE=true && echo "AniPm needs update: $MY_ANIPM_VER -> $ANIPM_VER"
           [ "$HIANIME_VER" != "$MY_HIANIME_VER" ] && NEEDS_UPDATE=true && echo "HiAnime needs update: $MY_HIANIME_VER -> $HIANIME_VER"
@@ -160,6 +163,7 @@ jobs:
           echo "moviebox_ver=$MOVIEBOX_VER" >> $GITHUB_OUTPUT
           echo "movieboxin_ver=$MOVIEBOXIN_VER" >> $GITHUB_OUTPUT
           echo "easyplay_ver=$EASYPLAY_VER" >> $GITHUB_OUTPUT
+          echo "clowniptv_ver=$CLOWNIPTV_VER" >> $GITHUB_OUTPUT
           echo "anikoto_ver=$ANIKOTO_VER" >> $GITHUB_OUTPUT
           echo "anipm_ver=$ANIPM_VER" >> $GITHUB_OUTPUT
           echo "hianime_ver=$HIANIME_VER" >> $GITHUB_OUTPUT
@@ -179,6 +183,7 @@ jobs:
           echo "my_moviebox_ver=$MY_MOVIEBOX_VER" >> $GITHUB_OUTPUT
           echo "my_movieboxin_ver=$MY_MOVIEBOXIN_VER" >> $GITHUB_OUTPUT
           echo "my_easyplay_ver=$MY_EASYPLAY_VER" >> $GITHUB_OUTPUT
+          echo "my_clowniptv_ver=$MY_CLOWNIPTV_VER" >> $GITHUB_OUTPUT
           echo "my_anikoto_ver=$MY_ANIKOTO_VER" >> $GITHUB_OUTPUT
           echo "my_anipm_ver=$MY_ANIPM_VER" >> $GITHUB_OUTPUT
           echo "my_hianime_ver=$MY_HIANIME_VER" >> $GITHUB_OUTPUT
@@ -256,6 +261,12 @@ jobs:
           MY_EASYPLAY_VER="${{ steps.fetch_versions.outputs.my_easyplay_ver }}"
           if [ "$EASYPLAY_VER" != "$MY_EASYPLAY_VER" ]; then
             download_with_retry "$BASE_URL/EasyPlayProvider.cs3" "EasyPlayProvider.cs3"
+          fi
+          
+          CLOWNIPTV_VER="${{ steps.fetch_versions.outputs.clowniptv_ver }}"
+          MY_CLOWNIPTV_VER="${{ steps.fetch_versions.outputs.my_clowniptv_ver }}"
+          if [ "$CLOWNIPTV_VER" != "$MY_CLOWNIPTV_VER" ]; then
+            download_with_retry "$BASE_URL/ClownIPTVProvider.cs3" "ClownIPTVProvider.cs3"
           fi
           
           ANIKOTO_VER="${{ steps.fetch_versions.outputs.anikoto_ver }}"
@@ -865,7 +876,7 @@ jobs:
           phisher_map = {p["internalName"]: p for p in phisher}
           csx_map = {p["internalName"]: p for p in csx}
           raghav_map = {p["internalName"]: p for p in raghav}
-          cnc_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN", "EasyPlayProvider"]
+          cnc_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN", "EasyPlayProvider", "ClownIPTVProvider"]
           phisher_plugins = ["AniKoto", "AniPm", "HiAnime", "StreamPlay", "Reanime", "MovieBoxProviderPH", "AniVortex", "MultiMoviesProvider", "HDhub4u"]
           raghav_plugins = ["Play4u", "Movy", "Anv"]
           csx_plugins = ["CineStream"]
@@ -943,6 +954,10 @@ jobs:
           EASYPLAY_VER="${{ steps.fetch_versions.outputs.easyplay_ver }}"
           MY_EASYPLAY_VER="${{ steps.fetch_versions.outputs.my_easyplay_ver }}"
           [ "$EASYPLAY_VER" != "$MY_EASYPLAY_VER" ] && MSG+="- EasyPlay v$MY_EASYPLAY_VER → v$EASYPLAY_VER"$'\n'
+          
+          CLOWNIPTV_VER="${{ steps.fetch_versions.outputs.clowniptv_ver }}"
+          MY_CLOWNIPTV_VER="${{ steps.fetch_versions.outputs.my_clowniptv_ver }}"
+          [ "$CLOWNIPTV_VER" != "$MY_CLOWNIPTV_VER" ] && MSG+="- ClownIPTVProvider v$MY_CLOWNIPTV_VER → v$CLOWNIPTV_VER"$'\n'
           
           ANIKOTO_VER="${{ steps.fetch_versions.outputs.anikoto_ver }}"
           MY_ANIKOTO_VER="${{ steps.fetch_versions.outputs.my_anikoto_ver }}"
