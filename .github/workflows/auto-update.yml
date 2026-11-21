@@ -103,6 +103,7 @@ jobs:
           
           # Extract versions for CSX (Megix) plugins
           CINESTREAM_VER=$(jq -r '.[] | select(.internalName=="CineStream") | .version' /tmp/csx_plugins.json)
+          MOVIESDRIVE_VER=$(jq -r '.[] | select(.internalName=="MoviesDrive") | .version' /tmp/csx_plugins.json)
           
           # Extract versions for Raghav plugins
           PLAY4U_VER=$(jq -r '.[] | select(.internalName=="Play4u") | .version' /tmp/raghav_plugins.json)
@@ -125,14 +126,15 @@ jobs:
           MY_MULTIMOVIES_VER=$(jq -r '.[] | select(.internalName=="MultiMoviesProvider") | .version' plugins.json)
           MY_HDHUB4U_VER=$(jq -r '.[] | select(.internalName=="HDhub4u") | .version' plugins.json)
           MY_CINESTREAM_VER=$(jq -r '.[] | select(.internalName=="CineStream") | .version' plugins.json)
+          MY_MOVIESDRIVE_VER=$(jq -r '.[] | select(.internalName=="MoviesDrive") | .version' plugins.json)
           MY_PLAY4U_VER=$(jq -r '.[] | select(.internalName=="Play4u") | .version' plugins.json)
           MY_MOVY_VER=$(jq -r '.[] | select(.internalName=="Movy") | .version' plugins.json)
           MY_ANV_VER=$(jq -r '.[] | select(.internalName=="Anv") | .version' plugins.json)
           MY_EASYPLAY_VER=$(jq -r '.[] | select(.internalName=="EasyPlayProvider") | .version' plugins.json)
           MY_CLOWNIPTV_VER=$(jq -r '.[] | select(.internalName=="ClownIPTVProvider") | .version' plugins.json)
           
-          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | EasyPlay=$EASYPLAY_VER | ClownIPTV=$CLOWNIPTV_VER | AniKoto=$ANIKOTO_VER | AniPm=$ANIPM_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER | Reanime=$REANIME_VER | MovieBoxPH=$MOVIEBOXPH_VER | AniVortex=$ANIVORTEX_VER | MultiMovies=$MULTIMOVIES_VER | HDhub4u=$HDHUB4U_VER | CineStream=$CINESTREAM_VER | Play4u=$PLAY4U_VER | Movy=$MOVY_VER | Anv=$ANV_VER"
-          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | EasyPlay=$MY_EASYPLAY_VER | ClownIPTV=$MY_CLOWNIPTV_VER | AniKoto=$MY_ANIKOTO_VER | AniPm=$MY_ANIPM_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER | Reanime=$MY_REANIME_VER | MovieBoxPH=$MY_MOVIEBOXPH_VER | AniVortex=$MY_ANIVORTEX_VER | MultiMovies=$MY_MULTIMOVIES_VER | HDhub4u=$MY_HDHUB4U_VER | CineStream=$MY_CINESTREAM_VER | Play4u=$MY_PLAY4U_VER | Movy=$MY_MOVY_VER | Anv=$MY_ANV_VER"
+          echo "Upstream  | CastleTV=$CASTLE_VER | CNCVerse=$CNCVERSE_VER | CNCVerseMob=$CNCVERSE_MOB_VER | MovieBox=$MOVIEBOX_VER | MovieBoxIN=$MOVIEBOXIN_VER | EasyPlay=$EASYPLAY_VER | ClownIPTV=$CLOWNIPTV_VER | AniKoto=$ANIKOTO_VER | AniPm=$ANIPM_VER | HiAnime=$HIANIME_VER | StreamPlay=$STREAMPLAY_VER | Reanime=$REANIME_VER | MovieBoxPH=$MOVIEBOXPH_VER | AniVortex=$ANIVORTEX_VER | MultiMovies=$MULTIMOVIES_VER | HDhub4u=$HDHUB4U_VER | CineStream=$CINESTREAM_VER | MoviesDrive=$MOVIESDRIVE_VER | Play4u=$PLAY4U_VER | Movy=$MOVY_VER | Anv=$ANV_VER"
+          echo "Current   | CastleTV=$MY_CASTLE_VER | CNCVerse=$MY_CNCVERSE_VER | CNCVerseMob=$MY_CNCVERSE_MOB_VER | MovieBox=$MY_MOVIEBOX_VER | MovieBoxIN=$MY_MOVIEBOXIN_VER | EasyPlay=$MY_EASYPLAY_VER | ClownIPTV=$MY_CLOWNIPTV_VER | AniKoto=$MY_ANIKOTO_VER | AniPm=$MY_ANIPM_VER | HiAnime=$MY_HIANIME_VER | StreamPlay=$MY_STREAMPLAY_VER | Reanime=$MY_REANIME_VER | MovieBoxPH=$MY_MOVIEBOXPH_VER | AniVortex=$MY_ANIVORTEX_VER | MultiMovies=$MY_MULTIMOVIES_VER | HDhub4u=$MY_HDHUB4U_VER | CineStream=$MY_CINESTREAM_VER | MoviesDrive=$MY_MOVIESDRIVE_VER | Play4u=$MY_PLAY4U_VER | Movy=$MY_MOVY_VER | Anv=$MY_ANV_VER"
           
           # Determine which need updating
           NEEDS_UPDATE=false
@@ -153,6 +155,7 @@ jobs:
           [ "$MULTIMOVIES_VER" != "$MY_MULTIMOVIES_VER" ] && NEEDS_UPDATE=true && echo "MultiMovies needs update: $MY_MULTIMOVIES_VER -> $MULTIMOVIES_VER"
           [ "$HDHUB4U_VER" != "$MY_HDHUB4U_VER" ] && NEEDS_UPDATE=true && echo "HDhub4u needs update: $MY_HDHUB4U_VER -> $HDHUB4U_VER"
           [ "$CINESTREAM_VER" != "$MY_CINESTREAM_VER" ] && NEEDS_UPDATE=true && echo "CineStream needs update: $MY_CINESTREAM_VER -> $CINESTREAM_VER"
+          [ "$MOVIESDRIVE_VER" != "$MY_MOVIESDRIVE_VER" ] && NEEDS_UPDATE=true && echo "MoviesDrive needs update: $MY_MOVIESDRIVE_VER -> $MOVIESDRIVE_VER"
           [ "$PLAY4U_VER" != "$MY_PLAY4U_VER" ] && NEEDS_UPDATE=true && echo "Play4u needs update: $MY_PLAY4U_VER -> $PLAY4U_VER"          
           [ "$MOVY_VER" != "$MY_MOVY_VER" ] && NEEDS_UPDATE=true && echo "Movy needs update: $MY_MOVY_VER -> $MOVY_VER"
           [ "$ANV_VER" != "$MY_ANV_VER" ] && NEEDS_UPDATE=true && echo "Anv needs update: $MY_ANV_VER -> $ANV_VER"          
@@ -174,6 +177,7 @@ jobs:
           echo "multimovies_ver=$MULTIMOVIES_VER" >> $GITHUB_OUTPUT
           echo "hdhub4u_ver=$HDHUB4U_VER" >> $GITHUB_OUTPUT
           echo "cinestream_ver=$CINESTREAM_VER" >> $GITHUB_OUTPUT
+          echo "moviesdrive_ver=$MOVIESDRIVE_VER" >> $GITHUB_OUTPUT
           echo "play4u_ver=$PLAY4U_VER" >> $GITHUB_OUTPUT
           echo "movy_ver=$MOVY_VER" >> $GITHUB_OUTPUT
           echo "anv_ver=$ANV_VER" >> $GITHUB_OUTPUT
@@ -194,6 +198,7 @@ jobs:
           echo "my_multimovies_ver=$MY_MULTIMOVIES_VER" >> $GITHUB_OUTPUT
           echo "my_hdhub4u_ver=$MY_HDHUB4U_VER" >> $GITHUB_OUTPUT
           echo "my_cinestream_ver=$MY_CINESTREAM_VER" >> $GITHUB_OUTPUT
+          echo "my_moviesdrive_ver=$MY_MOVIESDRIVE_VER" >> $GITHUB_OUTPUT
           echo "my_play4u_ver=$MY_PLAY4U_VER" >> $GITHUB_OUTPUT
           echo "my_movy_ver=$MY_MOVY_VER" >> $GITHUB_OUTPUT
           echo "my_anv_ver=$MY_ANV_VER" >> $GITHUB_OUTPUT
@@ -327,6 +332,12 @@ jobs:
           MY_CINESTREAM_VER="${{ steps.fetch_versions.outputs.my_cinestream_ver }}"
           if [ "$CINESTREAM_VER" != "$MY_CINESTREAM_VER" ]; then
             download_with_retry "https://raw.githubusercontent.com/SaurabhKaperwan/CSX/builds/CineStream.cs3" "CineStream.cs3"
+          fi
+          
+          MOVIESDRIVE_VER="${{ steps.fetch_versions.outputs.moviesdrive_ver }}"
+          MY_MOVIESDRIVE_VER="${{ steps.fetch_versions.outputs.my_moviesdrive_ver }}"
+          if [ "$MOVIESDRIVE_VER" != "$MY_MOVIESDRIVE_VER" ]; then
+            download_with_retry "https://raw.githubusercontent.com/SaurabhKaperwan/CSX/builds/MoviesDrive.cs3" "MoviesDrive.cs3"
           fi
           
           PLAY4U_VER="${{ steps.fetch_versions.outputs.play4u_ver }}"
@@ -879,7 +890,7 @@ jobs:
           cnc_plugins = ["CastleTvProvider", "CNC Verse", "CNC Verse Mobile", "MovieBoxProvider", "MovieBoxProviderIN", "EasyPlayProvider", "ClownIPTVProvider"]
           phisher_plugins = ["AniKoto", "AniPm", "HiAnime", "StreamPlay", "Reanime", "MovieBoxProviderPH", "AniVortex", "MultiMoviesProvider", "HDhub4u"]
           raghav_plugins = ["Play4u", "Movy", "Anv"]
-          csx_plugins = ["CineStream"]
+          csx_plugins = ["CineStream", "MoviesDrive"]
           for plugin in plugins:
               name = plugin["internalName"]
               
@@ -1010,6 +1021,10 @@ jobs:
           CINESTREAM_VER="${{ steps.fetch_versions.outputs.cinestream_ver }}"
           MY_CINESTREAM_VER="${{ steps.fetch_versions.outputs.my_cinestream_ver }}"
           [ "$CINESTREAM_VER" != "$MY_CINESTREAM_VER" ] && MSG+="- CineStream v$MY_CINESTREAM_VER → v$CINESTREAM_VER"$'\n'
+          
+          MOVIESDRIVE_VER="${{ steps.fetch_versions.outputs.moviesdrive_ver }}"
+          MY_MOVIESDRIVE_VER="${{ steps.fetch_versions.outputs.my_moviesdrive_ver }}"
+          [ "$MOVIESDRIVE_VER" != "$MY_MOVIESDRIVE_VER" ] && MSG+="- MoviesDrive v$MY_MOVIESDRIVE_VER → v$MOVIESDRIVE_VER"$'\n'
           
                     
           MSG+=$'\n'"Donation popups, ads and subscription dialogs stripped."
