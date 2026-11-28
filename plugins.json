@@ -1,5 +1,4 @@
 [
-<<<<<<< HEAD
   {
     "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
     "fileHash": "sha256-4e2e76ef42f298297979d93a9a30064c413256ca350af3cfc8d76310c2b00319",
@@ -193,16 +192,16 @@
     "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
     "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
     "status": 1,
-    "version": 715,
+    "version": 716,
     "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
-    "fileSize": 2233504,
+    "fileSize": 2247295,
     "language": "en",
     "authors": [
       "Phisher98",
       "Hexated"
     ],
     "description": "#1 best extention based on MultiAPI",
-    "fileHash": "sha256-e2f88982d9e3be7cecaef2fc2acaa4b4e8a92e5d4d67fee7707f6c42aca9b33d",
+    "fileHash": "sha256-ccedccef6101b23097d39bb9ef081177beda4f1dd7b182909ef05c42ec0589d2",
     "internalName": "StreamPlay",
     "name": "StreamPlay",
     "tvTypes": [
@@ -246,12 +245,12 @@
     "internalName": "MovieBoxProviderPH",
     "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProviderPH.cs3",
     "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-    "fileSize": 263398,
+    "fileSize": 271308,
     "authors": [
       "Phisher98"
     ],
-    "version": 43,
-    "fileHash": "sha256-db3ae1714801710e031e28616c6218f9a6dd744905dd61c20215736c09da7912",
+    "version": 45,
+    "fileHash": "sha256-5fb042193cacd3d83aef9f1cd6d3923202e1453f3f72009883b23ec3d8b1f5f6",
     "status": 1,
     "language": "en",
     "name": "MovieBoxPH",
@@ -416,7 +415,7 @@
     "fileSize": 50530
   },
   {
-    "version": 0,
+    "version": 2,
     "language": "en",
     "internalName": "ClownIPTVProvider",
     "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/ClownIPTVProvider.cs3",
@@ -436,7 +435,7 @@
     "apiVersion": 1
   },
   {
-    "version": 0,
+    "version": 33,
     "fileSize": 47290,
     "description": "High Quality Movies and TV Shows",
     "internalName": "MoviesDrive",
@@ -479,464 +478,3 @@
     "version": 0
   }
 ]
-=======
-    {
-        "iconUrl": "https://anikototv.to/AnikotoTheme/assets/images/favicon.png",
-        "fileHash": "sha256-4e2e76ef42f298297979d93a9a30064c413256ca350af3cfc8d76310c2b00319",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 81340,
-        "status": 1,
-        "language": "en",
-        "authors": [
-            "phisher98"
-        ],
-        "tvTypes": [
-            "Anime",
-            "AnimeMovie"
-        ],
-        "version": 7,
-        "internalName": "AniKoto",
-        "description": "AniKoto - Anime streaming",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniKoto.cs3",
-        "name": "AniKoto"
-    },
-    {
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniPm.cs3",
-        "status": 1,
-        "version": 1,
-        "name": "AniPm",
-        "internalName": "AniPm",
-        "authors": [
-            "Phisher98"
-        ],
-        "description": "AniPm - Watch Anime Online Free",
-        "fileSize": 106785,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "language": "en",
-        "tvTypes": [
-            "Anime",
-            "AnimeMovie",
-            "OVA"
-        ],
-        "iconUrl": "https://a.favicon.im/ani.pm?larger=true",
-        "apiVersion": 1,
-        "fileHash": "sha256-c7318926a2c743df193cbf2ae71619551fd4871baebe947cb6a23d4eb434da4d"
-    },
-    {
-        "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/EasyPlayProvider/icon.png",
-        "fileHash": "sha256-4bc630af6681567edeeaa52eee400ab53f06e45077959f22e0daa22c05723eda",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 65946,
-        "status": 1,
-        "language": "en",
-        "authors": [
-            "NivinCNC"
-        ],
-        "tvTypes": [
-            "Live"
-        ],
-        "version": 12,
-        "internalName": "EasyPlayProvider",
-        "description": "EasyPlay IPTV Live TV channels (auto-leased Xtream playlist, no login)",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/EasyPlayProvider.cs3",
-        "name": "EasyPlayProvider"
-    },
-    {
-        "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CastleTvProvider/icon.png",
-        "fileHash": "sha256-f2847dd8462ea06198a88ca8989e374366cb58cd486726d5d5cb3872212e32dc",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 79153,
-        "status": 1,
-        "language": "ta",
-        "authors": [
-            "NivinCNC"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries"
-        ],
-        "version": 48,
-        "internalName": "CastleTvProvider",
-        "description": "Castle TV Movies and Series Provider",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CastleTvProvider.cs3",
-        "name": "CastleTvProvider"
-    },
-    {
-        "iconUrl": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/master/Logos/mirrorverse.png",
-        "fileHash": "sha256-5ebd36bb0fe72b464595e641cd6605f1dc41800839ad07ad0206b83b45d25ea7",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 83887,
-        "status": 1,
-        "language": "ta",
-        "authors": [
-            "NivinCNC"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries"
-        ],
-        "version": 116,
-        "internalName": "CNC Verse",
-        "description": "Netflix, PrimeVideo, Disney+ Hotstar Contents in Multiple Languages",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC Verse.cs3",
-        "name": "Mirror Verse"
-    },
-    {
-        "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/CNC%20Verse%20Mobile/logo.jpeg",
-        "fileHash": "sha256-91768b34c7b0cd680b6250273072772a4e6133f5b193ca25bc82b4a71ea2c7d6",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 89995,
-        "status": 1,
-        "language": "ta",
-        "authors": [
-            "NivinCNC"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries"
-        ],
-        "version": 14,
-        "internalName": "CNC Verse Mobile",
-        "description": "NetMirror Mobile API",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CNC Verse Mobile.cs3",
-        "name": "Mirror Verse Mobile"
-    },
-    {
-        "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/MovieBoxProvider/icon.png",
-        "fileHash": "sha256-bda2a46a76389de5e977b0b8e7858dff9285eb26a5badf09a05b8a61af541274",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 86735,
-        "status": 1,
-        "language": "ta",
-        "authors": [
-            "NivinCNC"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries"
-        ],
-        "version": 55,
-        "internalName": "MovieBoxProvider",
-        "description": "Multi Language Movies and Series Provider",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProvider.cs3",
-        "name": "MovieBoxProvider"
-    },
-    {
-        "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/MovieBoxProviderIN/icon.png",
-        "fileHash": "sha256-da5e4f102fb261ee4abe059a6aadebb0d7cb965c32e7060a690e28839bf3bfed",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 84382,
-        "status": 1,
-        "language": "ta",
-        "authors": [
-            "NivinCNC"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries"
-        ],
-        "version": 57,
-        "internalName": "MovieBoxProviderIN",
-        "description": "Multi Language Movies and Series Provider (Local homepage based on region)",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProviderIN.cs3",
-        "name": "MovieBoxProviderIN"
-    },
-    {
-        "apiVersion": 1,
-        "fileHash": "sha256-5d994368c54b40291e6b3a25287e71730f1d51e70096348da87d786d943e5cef",
-        "status": 1,
-        "tvTypes": [
-            "Anime",
-            "OVA"
-        ],
-        "iconUrl": "https://www.google.com/s2/favicons?domain=hianime.at&sz=%size%",
-        "authors": [
-            "Phisher98"
-        ],
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "language": "en",
-        "description": null,
-        "version": 2,
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/HiAnime.cs3",
-        "internalName": "HiAnime",
-        "fileSize": 84904,
-        "name": "HiAnime"
-    },
-    {
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "status": 1,
-        "version": 716,
-        "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
-        "fileSize": 2247295,
-        "language": "en",
-        "authors": [
-            "Phisher98",
-            "Hexated"
-        ],
-        "description": "#1 best extention based on MultiAPI",
-        "fileHash": "sha256-ccedccef6101b23097d39bb9ef081177beda4f1dd7b182909ef05c42ec0589d2",
-        "internalName": "StreamPlay",
-        "name": "StreamPlay",
-        "tvTypes": [
-            "AsianDrama",
-            "TvSeries",
-            "Anime",
-            "Movie",
-            "Cartoon",
-            "AnimeMovie"
-        ],
-        "apiVersion": 1
-    },
-    {
-        "iconUrl": "https://reanime.to/favicon.ico",
-        "tvTypes": [
-            "Anime",
-            "AnimeMovie",
-            "OVA"
-        ],
-        "internalName": "Reanime",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Reanime.cs3",
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 103925,
-        "authors": [
-            "Phisher98"
-        ],
-        "version": 3,
-        "fileHash": "sha256-9992b023b95fab54373c29216dfd092819e2efa352d1b78c3271de3b6d45a9dd",
-        "status": 1,
-        "language": "en",
-        "name": "Reanime",
-        "description": "Reanime - Anime streaming",
-        "apiVersion": 1
-    },
-    {
-        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/moviebox.png",
-        "tvTypes": [
-            "Movie",
-            "TvSeries"
-        ],
-        "internalName": "MovieBoxProviderPH",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MovieBoxProviderPH.cs3",
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 271308,
-        "authors": [
-            "Phisher98"
-        ],
-        "version": 45,
-        "fileHash": "sha256-5fb042193cacd3d83aef9f1cd6d3923202e1453f3f72009883b23ec3d8b1f5f6",
-        "status": 1,
-        "language": "en",
-        "name": "MovieBoxPH",
-        "description": "Multi Language Movies and Series Provider (Phisher98 version)",
-        "apiVersion": 1
-    },
-    {
-        "iconUrl": "https://github.com/SaurabhKaperwan/CSX/raw/refs/heads/master/CineStream/icon.png",
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "Anime",
-            "AsianDrama",
-            "Torrent"
-        ],
-        "internalName": "CineStream",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/CineStream.cs3",
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 695013,
-        "authors": [
-            "megix"
-        ],
-        "version": 487,
-        "fileHash": "sha256-30dc643628702d6b2fe139339e59996783c95a0c1d41efe0a31872ae4d10908b",
-        "status": 1,
-        "language": "en",
-        "name": "CineStream",
-        "description": "One stop solution for Movies, Series, Anime, AsianDrama and Torrents",
-        "apiVersion": 1
-    },
-    {
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniVortex.cs3",
-        "status": 1,
-        "version": 16,
-        "name": "AniVortex",
-        "internalName": "AniVortex",
-        "authors": [
-            "Phisher98"
-        ],
-        "description": "AniVortex \u2014 Anime, movies & TV series streaming",
-        "fileSize": 243953,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "language": "hi",
-        "tvTypes": [
-            "Anime",
-            "AnimeMovie",
-            "OVA",
-            "TvSeries",
-            "Movie"
-        ],
-        "iconUrl": "https://anivortex.in/images/anivortex_logo_transparent.webp",
-        "apiVersion": 1,
-        "fileHash": "sha256-3f51f90dcf7da93925beea125b9c9b58e9035fc2e8c79fd9fd2067844c373971"
-    },
-    {
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MultiMoviesProvider.cs3",
-        "status": 1,
-        "version": 55,
-        "name": "MultiMoviesProvider",
-        "internalName": "MultiMoviesProvider",
-        "authors": [
-            "Phisher98"
-        ],
-        "description": "Indian Multi-language HD Provider",
-        "fileSize": 142731,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "language": "hi",
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "Anime"
-        ],
-        "iconUrl": "https://raw.githubusercontent.com/LikDev-256/likdev256-tamil-providers/master/MultiMoviesProvider/icon.png",
-        "apiVersion": 1,
-        "fileHash": "sha256-5b8dafa62d54e02367bb5612f74cb2aa46ac52836c8b277f08398c9ed2eacfcf"
-    },
-    {
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/HDhub4u.cs3",
-        "status": 1,
-        "version": 57,
-        "name": "HDhub4u",
-        "internalName": "HDhub4u",
-        "authors": [
-            "Phisher98"
-        ],
-        "fileSize": 114806,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "language": "hi",
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "Anime"
-        ],
-        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/HDHUB.png",
-        "apiVersion": 1,
-        "fileHash": "sha256-867f96850fb6275380a39d7678c0368ce186ffe58b1f4fc285412edd950a889d"
-    },
-    {
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Play4u.cs3",
-        "status": 1,
-        "version": 1,
-        "name": "Play4u",
-        "internalName": "Play4u",
-        "authors": [
-            "KSHITIJ8473"
-        ],
-        "description": "Play4u - Movies and series with multi-language audio and quality options",
-        "fileSize": 44916,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "language": "en",
-        "tvTypes": [
-            "Movie",
-            "TvSeries"
-        ],
-        "iconUrl": "https://www.google.com/s2/favicons?domain=play4u.org&sz=64",
-        "apiVersion": 1,
-        "fileHash": "sha256-498fcac4bdf15bc7a59a2bc391e189fb815d8eb98e9299770cde0fd63c5d6dec"
-    },
-    {
-        "description": "Movy - Movies and TV shows with multi-language audio (English, German, French, Hindi, Spanish, Tamil and more)",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Movy.cs3",
-        "language": "en",
-        "apiVersion": 1,
-        "authors": [
-            "KSHITIJ8473"
-        ],
-        "status": 1,
-        "iconUrl": "https://www.movy.sx/icon-192x192.png",
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "Anime",
-            "AnimeMovie"
-        ],
-        "fileHash": "sha256-0bf372d17d3048ffb7fa8eb5d0e09786af91bc2bad6d472c5b7ed7b7b8f6abe2",
-        "version": 7,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 58031,
-        "name": "Movy",
-        "internalName": "Movy"
-    },
-    {
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Anv.cs3",
-        "authors": [
-            "KSHITIJ8473"
-        ],
-        "description": "Anime sub and dub",
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "name": "Anv",
-        "language": "en",
-        "tvTypes": [
-            "Anime",
-            "AnimeMovie",
-            "OVA"
-        ],
-        "fileHash": "sha256-c0e394d94928c4755b4bddd96b264b092c88d9adc9de58a911d6099aa24572ac",
-        "version": 8,
-        "iconUrl": "https://anv.to/brand/icon-512.png",
-        "status": 1,
-        "apiVersion": 1,
-        "internalName": "Anv",
-        "fileSize": 50530
-    },
-    {
-        "version": 2,
-        "language": "en",
-        "internalName": "ClownIPTVProvider",
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/ClownIPTVProvider.cs3",
-        "authors": [
-            "NivinCNC"
-        ],
-        "name": "ClownIPTVProvider",
-        "status": 1,
-        "fileSize": 42754,
-        "description": "Clown IPTV - 28k+ live TV channels from around the world (HLS)",
-        "fileHash": "sha256-3fb6c407392733b6294355ad2483bc4320535243df71c1b4c4bd12f66c150329",
-        "iconUrl": "https://github.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/raw/refs/heads/master/Logos/ClownIPTVProvider/icon.png",
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "tvTypes": [
-            "Live"
-        ],
-        "apiVersion": 1
-    },
-    {
-        "version": 33,
-        "fileSize": 47290,
-        "description": "High Quality Movies and TV Shows",
-        "internalName": "MoviesDrive",
-        "fileHash": "sha256-52758210caa1cf0a6dc929d0f73fec5919e0ab66e5eddf6386ed30f7c771980a",
-        "status": 1,
-        "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "authors": [
-            "megix"
-        ],
-        "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MoviesDrive.cs3",
-        "apiVersion": 1,
-        "iconUrl": "https://github.com/SaurabhKaperwan/CSX/raw/refs/heads/master/MoviesDrive/icon.png",
-        "name": "MoviesDrive",
-        "tvTypes": [
-            "TvSeries",
-            "Movie",
-            "AsianDrama",
-            "Anime"
-        ],
-        "language": "hi"
-    }
-]
->>>>>>> 2fcc8ffed8090cfc0029a79ffa3496d266fd1c5d
