@@ -456,5 +456,25 @@
       "Anime"
     ],
     "language": "hi"
+  },
+  {
+    "authors": [
+      "NivinCNC"
+    ],
+    "language": "ta",
+    "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
+    "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/JioTVPlusProvider.cs3",
+    "fileHash": "sha256-1bd6a043a951bf5988bbbee6f18ffc10805ddc66a90a51eb5c04955ba262d8a8",
+    "internalName": "JioTVPlusProvider",
+    "apiVersion": 1,
+    "description": "Jio TV+ premium live channels (Sun bouquet, sports & more)",
+    "iconUrl": "https://raw.githubusercontent.com/NivinCNC/CNCVerse-Cloud-Stream-Extension/refs/heads/master/Logos/JioTVPlusProvider/logo.png",
+    "fileSize": 60612,
+    "status": 1,
+    "name": "JioTVPlusProvider",
+    "tvTypes": [
+      "Live"
+    ],
+    "version": 0
   }
 ]
