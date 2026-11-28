@@ -23,14 +23,14 @@
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniPm.cs3",
         "status": 1,
-        "version": 1,
+        "version": 2,
         "name": "AniPm",
         "internalName": "AniPm",
         "authors": [
             "Phisher98"
         ],
         "description": "AniPm - Watch Anime Online Free",
-        "fileSize": 106785,
+        "fileSize": 147478,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "language": "en",
         "tvTypes": [
@@ -40,7 +40,7 @@
         ],
         "iconUrl": "https://a.favicon.im/ani.pm?larger=true",
         "apiVersion": 1,
-        "fileHash": "sha256-c7318926a2c743df193cbf2ae71619551fd4871baebe947cb6a23d4eb434da4d"
+        "fileHash": "sha256-7dce4edf5bffaace196c2941afc0d305b72d4b78dd5f6e066953f579e5b86064"
     },
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/AniVortex.cs3",
@@ -218,13 +218,13 @@
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/HDhub4u.cs3",
         "status": 1,
-        "version": 57,
+        "version": 58,
         "name": "HDhub4u",
         "internalName": "HDhub4u",
         "authors": [
             "Phisher98"
         ],
-        "fileSize": 114806,
+        "fileSize": 155632,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "language": "hi",
         "tvTypes": [
@@ -234,7 +234,7 @@
         ],
         "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/HDHUB.png",
         "apiVersion": 1,
-        "fileHash": "sha256-867f96850fb6275380a39d7678c0368ce186ffe58b1f4fc285412edd950a889d"
+        "fileHash": "sha256-2652fe65a13e33e335377572daaf932ae22cff7bbfe4b41c2316788cffac324c"
     },
     {
         "apiVersion": 1,
@@ -389,14 +389,14 @@
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/MultiMoviesProvider.cs3",
         "status": 1,
-        "version": 55,
+        "version": 56,
         "name": "MultiMoviesProvider",
         "internalName": "MultiMoviesProvider",
         "authors": [
             "Phisher98"
         ],
         "description": "Indian Multi-language HD Provider",
-        "fileSize": 142731,
+        "fileSize": 184744,
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "language": "hi",
         "tvTypes": [
@@ -406,7 +406,7 @@
         ],
         "iconUrl": "https://raw.githubusercontent.com/LikDev-256/likdev256-tamil-providers/master/MultiMoviesProvider/icon.png",
         "apiVersion": 1,
-        "fileHash": "sha256-5b8dafa62d54e02367bb5612f74cb2aa46ac52836c8b277f08398c9ed2eacfcf"
+        "fileHash": "sha256-16dbd7ac7856c7531bf56d1b3b3f66dcff01dbec51bea117fb49ef4d6d91b21d"
     },
     {
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Play4u.cs3",
@@ -439,12 +439,12 @@
         "internalName": "Reanime",
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/Reanime.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
-        "fileSize": 103925,
+        "fileSize": 145332,
         "authors": [
             "Phisher98"
         ],
-        "version": 3,
-        "fileHash": "sha256-9992b023b95fab54373c29216dfd092819e2efa352d1b78c3271de3b6d45a9dd",
+        "version": 4,
+        "fileHash": "sha256-c50705d1ecc753ab34a7f06158bf14b808ede2cf08ad078f120394e3641ef504",
         "status": 1,
         "language": "en",
         "name": "Reanime",
@@ -455,16 +455,16 @@
         "url": "https://raw.githubusercontent.com/sevouz/My-CloudStream-Plugins/builds/StreamPlay.cs3",
         "repositoryUrl": "https://github.com/sevouz/My-CloudStream-Plugins",
         "status": 1,
-        "version": 716,
+        "version": 717,
         "iconUrl": "https://i3.wp.com/yt3.googleusercontent.com/ytc/AIdro_nCBArSmvOc6o-k2hTYpLtQMPrKqGtAw_nC20rxm70akA=s900-c-k-c0x00ffffff-no-rj?ssl=1",
-        "fileSize": 2247295,
+        "fileSize": 2250341,
         "language": "en",
         "authors": [
             "Phisher98",
             "Hexated"
         ],
         "description": "#1 best extention based on MultiAPI",
-        "fileHash": "sha256-ccedccef6101b23097d39bb9ef081177beda4f1dd7b182909ef05c42ec0589d2",
+        "fileHash": "sha256-065a51606173850573f19350cd429ffa955ff153ab7c98024ed627ea9be821ea",
         "internalName": "StreamPlay",
         "name": "StreamPlay",
         "tvTypes": [
